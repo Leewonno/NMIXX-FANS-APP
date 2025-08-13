@@ -12,15 +12,19 @@ import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import Edit1 from './tutorial/Edit1';
 import Edit2 from './tutorial/Edit2';
 import Edit3 from './tutorial/Edit3';
+import { Home } from './app/pages';
+import { Header } from './app/widgets';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <View style={styles.container}>
-      <Edit1 />
-      <Edit2 />
-      <Edit3 />
+      <Header/>
+      <Home />
+      {/* <Edit1 /> */}
+      {/* <Edit2 /> */}
+      {/* <Edit3 /> */}
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       {/* <NewAppScreen templateFileName="App.tsx" /> */}
     </View>

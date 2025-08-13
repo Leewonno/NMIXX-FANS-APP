@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image, TextInput, ScrollView } from 'react-native';
+import styled from 'styled-components/native';
 
 const getFullName = (
   firstName: string,
@@ -28,6 +29,7 @@ const Edit1 = () => {
 
   return (
     <ScrollView>
+      <StyledText />
       <View
         style={{
           flex: 1,
@@ -56,5 +58,14 @@ const Edit1 = () => {
     </ScrollView>
   );
 };
+
+interface StyledTextProps {
+  readonly length?: number;
+}
+const StyledText = styled.Text<StyledTextProps>`
+  padding: 50px;
+  background-color: yellow;
+  text-align: center;
+`;
 
 export default Edit1;
