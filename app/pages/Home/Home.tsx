@@ -1,26 +1,22 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { HomeCommunity, HomeHeader } from '../../widgets';
 
 // Props
 type HomeProps = {
 };
 
-const ScrollBox = styled.ScrollView`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledText = styled.Text`
-  padding: 50px;
-  background-color: yellow;
-  text-align: center;
+const Box = styled.View`
+  /* width: 100%; */
 `;
 
 const Home = ({ }: HomeProps) => {
 
   return (
-    <ScrollBox>
-    </ScrollBox>
+    <Box>
+      <HomeHeader />
+      <HomeCommunity />
+    </Box>
   );
 };
 

@@ -8,20 +8,29 @@ type HeaderProps = {
 const Box = styled.View`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  position: fixed;
-  z-index: 9999;
+  padding: 20px;
+  /* position: fixed; */
+  /* z-index: 9999; */
 `;
 
 const LogoBox = styled.View`
+  
+`
+
+const LogoText = styled.Text`
   font-size: 2rem;
+  
 `
 
 const Header = ({ }: HeaderProps) => {
 
   return (
     <Box>
-      <LogoBox>We are FANS</LogoBox>
+      <LogoBox>
+        <LogoText>
+          We are FANS
+        </LogoText>
+      </LogoBox>
     </Box>
   );
 };
