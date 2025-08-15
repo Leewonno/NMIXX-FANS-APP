@@ -10,19 +10,25 @@ interface HomeCommunityButtonProps {
 
 const CommunityButton = styled(Pressable)`
   width: 50%;
-  max-height: 300px;
+  aspect-ratio: 1;
   position: relative;
 `;
 
 const CommunityButtonImage = styled.Image`
   width: 100%;
-  object-fit: contain;
+  height: 100%;
 `
 
 const CommunityButtonText = styled.Text`
-  text-align: center;
+  width: 100%;
   position: absolute;
-  bottom: 0;
+  left: 20px;
+  bottom: 20px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  text-shadow: 1px 1px 15px #00000023;
+  text-align: left;
 `
 
 const HomeCommunityButton = ({ name, img }: HomeCommunityButtonProps) => {

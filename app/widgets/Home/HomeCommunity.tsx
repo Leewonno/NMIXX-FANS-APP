@@ -9,30 +9,61 @@ import sullyoon from '../../../assets/imgs/sullyoon.jpg';
 import bae from '../../../assets/imgs/bae.webp';
 import jiwoo from '../../../assets/imgs/jiwoo.webp';
 import kyujin from '../../../assets/imgs/kyujin.webp';
+import { FlatList, ImageSourcePropType } from 'react-native';
 
 // Props
 interface HomeCommunityProps {
 };
 
-const Box = styled.ScrollView`
-  /* max-height: 100%; */
-  /* width: 100%; */
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
-  flex-grow: 1;
+interface DataType {
+  id: string;
+  img: ImageSourcePropType;
+}
+
+const Box = styled(FlatList<DataType>)`
+  height: 100%;
 `;
+
+const data: DataType[] = [
+  {
+    id: "LILY",
+    img: lily
+  },
+  {
+    id: "HAEWON",
+    img: haewon
+  },
+  {
+    id: "SULLYOON",
+    img: sullyoon
+  },
+  {
+    id: "BAE",
+    img: bae
+  },
+  {
+    id: "JIWOO",
+    img: jiwoo
+  },
+  {
+    id: "KYUJIN",
+    img: kyujin
+  },
+
+]
 
 const HomeCommunity = ({ }: HomeCommunityProps) => {
 
   return (
-    <Box>
-      <HomeCommunityButton name='LILY' img={lily} />
-      <HomeCommunityButton name='HAEWON' img={haewon} />
-      <HomeCommunityButton name='SULLYOON' img={sullyoon} />
-      <HomeCommunityButton name='BAE' img={bae} />
-      <HomeCommunityButton name='JIWOO' img={jiwoo} />
-      <HomeCommunityButton name='KYUJIN' img={kyujin} />
-    </Box>
+    <Box data={data}
+      renderItem={({ item }: { item: DataType }) => (
+        <HomeCommunityButton name={item.id} img={item.img} />
+      )}
+      numColumns={2}
+      keyExtractor={(item: DataType) => item.id}
+      columnWrapperStyle={{ gap: 2 }} // 가로 간격
+      contentContainerStyle={{ gap: 2 }} // 세로 간격
+    />
   );
 };
 

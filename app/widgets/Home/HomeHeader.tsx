@@ -8,7 +8,7 @@ interface HomeHeaderProps {
 
 const Box = styled.View`
   background-color: #fff;
-  padding: 2.5% 5%;
+  padding: 4% 5%;
 `;
 
 const LogoBox = styled.View`
