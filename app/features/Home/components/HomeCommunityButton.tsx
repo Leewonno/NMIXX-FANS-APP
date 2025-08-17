@@ -1,6 +1,14 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Image, ImageSourcePropType, Pressable } from 'react-native';
+import { ImageSourcePropType, Pressable } from 'react-native';
 import styled from 'styled-components/native';
+import { RootStackParamList } from '../../../shared';
+
+type CommunityScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
 
 // Props
 interface HomeCommunityButtonProps {
@@ -32,9 +40,14 @@ const CommunityButtonText = styled.Text`
 `
 
 const HomeCommunityButton = ({ name, img }: HomeCommunityButtonProps) => {
+  const navigation = useNavigation<CommunityScreenNavigationProp>();
 
   return (
-    <CommunityButton>
+    <CommunityButton
+      onPress={() =>
+        navigation.navigate('Community', { name })
+      }
+    >
       <CommunityButtonImage
         source={img}
       />

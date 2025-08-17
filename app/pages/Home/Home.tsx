@@ -7,7 +7,6 @@ type HomeProps = {
 };
 
 const Box = styled.View`
-  /* width: 100%; */
 `;
 
 const Home = ({ }: HomeProps) => {

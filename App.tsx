@@ -1,35 +1,45 @@
-import React, { Children } from 'react';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { Community, Home } from './app/pages';
+import { RootStackParamList } from './app/shared';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
-// import { NewAppScreen } from '@react-native/new-app-screen';
-import { SafeAreaView, StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-// import Edit1 from './tutorial/Edit1';
-// import Edit2 from './tutorial/Edit2';
-// import Edit3 from './tutorial/Edit3';
-import { Home } from './app/pages';
-import { Footer, Header } from './app/widgets';
-import { NewAppScreen } from '@react-native/new-app-screen';
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <Header/> */}
-      <Home />
-      {/* <Footer /> */}
-      {/* <Edit1 /> */}
-      {/* <Edit2 /> */}
-      {/* <Edit3 /> */}
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <NewAppScreen templateFileName="App.tsx" /> */}
-    </SafeAreaView>
+    /* Redux Toolkit */
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}
+      >
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              contentStyle: { backgroundColor: '#fff' }, // 전체 배경색 지정
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Community"
+              component={Community}
+              options={{
+                title: '',
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
