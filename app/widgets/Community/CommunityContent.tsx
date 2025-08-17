@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { CommunityImageBox } from '../../features';
+import { CommunityBoardBox, CommunityImageBox } from '../../features';
 import { useDispatch } from 'react-redux';
 import { setScrolled } from '../../../store/scrollSlice';
 
@@ -14,9 +14,7 @@ const Box = styled.ScrollView`
   height: 100%;
 `;
 
-const CommunityText = styled.Text`
-  
-`
+
 
 const CommunityContent = ({ name }: CommunityContentProps) => {
 
@@ -34,9 +32,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
       scrollEventThrottle={16}
     >
       <CommunityImageBox name={name} />
-      <CommunityText>
-        {name}
-      </CommunityText>
+      <CommunityBoardBox name={name} />
     </Box>
   );
 };

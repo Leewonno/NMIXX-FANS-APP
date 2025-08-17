@@ -1,2 +1,3 @@
-export { CommunityProfileBox } from './components'
-export { CommunityImageBox } from './components'
+export { CommunityProfileBox } from './ui'
+export { CommunityImageBox } from './ui'
+export { CommunityBoardBox } from './ui'

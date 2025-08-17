@@ -12,7 +12,7 @@ import FacebookIcon from '../../../../assets/icons/facebook.svg'
 import { Linking, Pressable } from 'react-native';
 
 // Props
-interface CommunityImageBoxProps {
+interface BoxProps {
   name: string;
 };
 
@@ -44,7 +44,7 @@ const LinkBox = styled.View`
 
 type AppType = 'yt' | 'is' | 'fa';
 
-const CommunityImageBox = ({ name }: CommunityImageBoxProps) => {
+const CommunityImageBox = ({ name }: BoxProps) => {
 
   const handlePress = async (url: string, type: AppType) => {
     let appUrl = `${url}`;
