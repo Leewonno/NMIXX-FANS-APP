@@ -61,8 +61,8 @@ const HomeCommunity = ({ }: HomeCommunityProps) => {
       )}
       numColumns={2}
       keyExtractor={(item: DataType) => item.id}
-      columnWrapperStyle={{ gap: 2 }} // 가로 간격
-      contentContainerStyle={{ gap: 2 }} // 세로 간격
+      columnWrapperStyle={{ gap: 3 }} // 가로 간격
+      contentContainerStyle={{ gap: 3 }} // 세로 간격
     />
   );
 };

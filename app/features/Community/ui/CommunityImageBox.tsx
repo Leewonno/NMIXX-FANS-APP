@@ -18,7 +18,7 @@ interface BoxProps {
 
 const Box = styled.View`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   position: relative;
 `;
 
@@ -34,7 +34,7 @@ const CommunityImage = styled.Image`
 
 const LinkBox = styled.View`
   position: absolute;
-  bottom: 50px;
+  bottom: 25px;
   flex-direction: row;
   align-items: center;
   justify-content: center;

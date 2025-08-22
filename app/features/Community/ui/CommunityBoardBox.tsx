@@ -18,9 +18,6 @@ const CommunityBoardBox = ({ name }: BoxProps) => {
 
   return (
     <Box>
-      <CommunityText>
-        {name}
-      </CommunityText>
     </Box>
   );
 };

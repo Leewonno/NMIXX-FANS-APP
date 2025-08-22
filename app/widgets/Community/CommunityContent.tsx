@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { CommunityBoardBox, CommunityImageBox } from '../../features';
 import { useDispatch } from 'react-redux';
 import { setScrolled } from '../../../store/scrollSlice';
+import { CommunityTabBar } from './CommunityTabBar';
 
 // Props
 interface CommunityContentProps {
@@ -13,8 +14,6 @@ const Box = styled.ScrollView`
   width: 100%;
   height: 100%;
 `;
-
-
 
 const CommunityContent = ({ name }: CommunityContentProps) => {
 
@@ -32,7 +31,8 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
       scrollEventThrottle={16}
     >
       <CommunityImageBox name={name} />
-      <CommunityBoardBox name={name} />
+      <CommunityTabBar />
+      {/* <CommunityBoardBox name={name} /> */}
     </Box>
   );
 };

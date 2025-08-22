@@ -10,3 +10,4 @@ export { HomeCommunity } from './Home'
 // Community
 export { CommunityHeader } from './Community'
 export { CommunityContent } from './Community'
+export { CommunityTabBar } from './Community'
