@@ -6,8 +6,7 @@ type BoxProps = {
 }
 
 const Box = styled.View`
-  border-radius: 50%;
-  /* border: 1px solid #ececec; */
+  border-radius: 12.5px;
   width: 25px;
   height: 25px;
 `
@@ -19,7 +18,7 @@ const ProfileButton = styled(Pressable)`
 const ProfileImage = styled.Image`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 12.5px;
   object-fit: cover;
 `
 

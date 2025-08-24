@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import lily from '../../../../assets/imgs/lily.webp';
 import haewon from '../../../../assets/imgs/haewon.webp';
@@ -9,7 +9,9 @@ import kyujin from '../../../../assets/imgs/kyujin.webp';
 import YouTubeIcon from '../../../../assets/icons/youtube.svg'
 import InstagramIcon from '../../../../assets/icons/instagram.svg'
 import FacebookIcon from '../../../../assets/icons/facebook.svg'
-import { Linking, Pressable } from 'react-native';
+import { Dimensions, Linking, Pressable } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 // Props
 interface BoxProps {
@@ -18,8 +20,9 @@ interface BoxProps {
 
 const Box = styled.View`
   width: 100%;
-  /* height: 100%; */
   position: relative;
+  margin-bottom: -50px;
+  z-index: 9999;
 `;
 
 const ImageBox = styled.View`
@@ -46,7 +49,18 @@ type AppType = 'yt' | 'is' | 'fa';
 
 const CommunityImageBox = ({ name }: BoxProps) => {
 
+  const y: number = useSelector((state: RootState) => state.scroll.y);
+  const [opacity, setOpacity] = useState<number>(1);
+
+  // 기기 가로 길이
+  const screenWidth = Dimensions.get('window').width;
+
+  useEffect(() => {
+    setOpacity(Math.max(0, Math.min(1, 1 - y / screenWidth)));
+  }, [y])
+
   const handlePress = async (url: string, type: AppType) => {
+    console.log("클릭")
     let appUrl = `${url}`;
     let webUrl = `${url}`;
 
@@ -72,7 +86,7 @@ const CommunityImageBox = ({ name }: BoxProps) => {
   };
 
   return (
-    <Box>
+    <Box style={{ opacity: opacity }}>
       <ImageBox>
         <CommunityImage source={
           name === 'LILY' ? lily :

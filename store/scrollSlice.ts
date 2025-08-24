@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ScrollState {
   scrolled: boolean;
+  y: number;
 }
 
 const initialState: ScrollState = {
   scrolled: false,
+  y: 0,
 };
 
 const scrollSlice = createSlice({
@@ -15,8 +17,11 @@ const scrollSlice = createSlice({
     setScrolled(state, action: PayloadAction<boolean>) {
       state.scrolled = action.payload;
     },
+    setY(state, action: PayloadAction<number>) {
+      state.y = action.payload;
+    },
   },
 });
 
-export const { setScrolled } = scrollSlice.actions;
+export const { setScrolled, setY } = scrollSlice.actions;
 export default scrollSlice.reducer;
