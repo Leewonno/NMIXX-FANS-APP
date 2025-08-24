@@ -6,6 +6,7 @@ import { CommunityItemList } from './CommunityItemList';
 // Props
 interface ComponentProps {
   category: string;
+  community: string;
 };
 
 const Component = styled.View`
@@ -13,12 +14,12 @@ const Component = styled.View`
   flex: 1;
 `;
 
-const CommunityBoard = ({ category }: ComponentProps) => {
+const CommunityBoard = ({ category, community }: ComponentProps) => {
 
   return (
     <Component>
-      <CommunityTitle category={category} />
-      <CommunityItemList category={category} />
+      <CommunityTitle category={category} community={community} />
+      <CommunityItemList category={category} community={community} />
     </Component>
   );
 };

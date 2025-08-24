@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { AppText } from '../../../shared';
+import { AppText, RootStackParamList, timeAgo } from '../../../shared';
 import TranslateIcon from '../../../../assets/icons/translate.svg'
+import StarIcon from '../../../../assets/icons/star.svg'
 import { Alert, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type CommunityDetailNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'CommunityDetail'
+>;
 
 // Props
 interface ComponentProps extends CommunityItemListProps {
@@ -10,12 +18,12 @@ interface ComponentProps extends CommunityItemListProps {
 
 const Component = styled.View`
   flex: 1;
-  gap: 10px;
 `;
 
 const ProfileBox = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
   /* align-items: center; */
 `
 
@@ -28,10 +36,16 @@ const ProfileImage = styled.Image`
   width: 35px;
   height: 35px;
   border-radius: 17.5px;
+  border-color: #c0c0c0;
 `
 
 const ProfileTextBox = styled.View`
-  
+  gap: 2px;
+`
+
+const ProfileNickBox = styled.View`
+  gap: 2px;
+  flex-direction: row;
 `
 
 const ProfileNick = styled(AppText)`
@@ -48,13 +62,26 @@ const Translate = styled.TouchableOpacity`
   
 `
 
-const ContentBox = styled.View`
+const ContentBox = styled.Pressable`
   width: 100%;
   padding: 15px;
-  background-color: #e9f8ff;
-  border-radius: 15px;
+  background-color: #f1fbff;
+  border-radius: 10px;
   flex-direction: column;
   gap: 15px;
+`
+
+const ContentTriangle = styled.View`
+  width: 0;
+  height: 0;
+  border-left-width: 6px;
+  border-right-width: 6px;
+  border-bottom-width: 10px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: #f1fbff;
+  align-self: flex-start; /* 부모 가로 중앙 정렬 */
+  margin-left: 12px;
 `
 
 const Content = styled(AppText)`
@@ -67,32 +94,107 @@ const ContentImage = styled.Image`
   width: 100%;
   height: ${screenWidth - 70}px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 7.5px;
 `
 
+const DivisionLine = styled.View`
+  width: 100%;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #e3e3e3;
+  margin-bottom: 15px;
+`
 
-const CommunityItem = ({ id, nick, profile_img, content, created_date, img_01 }: ComponentProps) => {
+const CommentBox = styled.View`
+`
+
+const CommentProfile = styled.View`
+  flex-direction: row;
+  gap: 10px;
+`
+
+const CommentProfileImage = styled.Image`
+  width: 25px;
+  height: 25px;
+  border-radius: 12.5px;
+  border-color: #c0c0c0;
+`
+
+const CommentProfileTextBox = styled.View`
+  gap: 2px;
+`
+
+const CommentProfileNickBox = styled.View`
+  gap: 2px;
+  flex-direction: row;
+`
+
+const CommentProfileNick = styled(AppText)`
+  font-weight: 500;
+`
+
+const CommentContent = styled(AppText)`
+  padding-top: 2px;
+`
+
+const CommunityItem = ({ id, member, content, createdAt, img01, boardComment }: ComponentProps) => {
+
+  const navigation = useNavigation<CommunityDetailNavigationProp>();
+
+  const handlePress = (id: number) => {
+    navigation.navigate('CommunityDetail', { id });
+  };
+
   return (
     <Component>
+      {/* 프로필 박스 */}
       <ProfileBox>
         <Profile>
-          <ProfileImage source={{ uri: profile_img }} />
+          <ProfileImage source={{ uri: member.profileImg }} />
           <ProfileTextBox>
-            <ProfileNick>{nick}</ProfileNick>
-            <ProfileDate>{created_date}</ProfileDate>
+            <ProfileNickBox>
+              <ProfileNick>{member.nick}</ProfileNick>
+              {member.role === 'C' ? <StarIcon width={15} height={15} fill={'#528cff'} /> : <></>}
+            </ProfileNickBox>
+            <ProfileDate>{timeAgo(createdAt)}</ProfileDate>
           </ProfileTextBox>
         </Profile>
+        {/* 번역버튼 */}
         <Translate onPress={() => Alert.alert('준비중인 서비스입니다.')}>
           <TranslateIcon width={17.5} height={17.5} fill={'#c0c0c0'} />
         </Translate>
       </ProfileBox>
-      <ContentBox>
+      {/* 말풍선효과 */}
+      <ContentTriangle />
+      <ContentBox onPress={()=>{handlePress(id)}}>
         <Content>{content}</Content>
         {
-          img_01 ? <ContentImage source={{ uri: img_01 }} /> : <></>
+          img01 ? <ContentImage source={{ uri: img01 }} /> : <></>
+        }
+        {boardComment ?
+          <CommentBox>
+            <DivisionLine />
+            <CommentProfile>
+              <CommentProfileImage source={{ uri: boardComment.member.profileImg }} />
+              <CommentProfileTextBox>
+                <CommentProfileNickBox>
+                  <CommentProfileNick>{boardComment.member.nick}</CommentProfileNick>
+                  {member.role === 'C' ? <StarIcon width={15} height={15} fill={'#528cff'} /> : <></>}
+                </CommentProfileNickBox>
+                {/* 댓글 내용 */}
+                <CommentContent>
+                  {boardComment.comment}
+                </CommentContent>
+              </CommentProfileTextBox>
+            </CommentProfile>
+
+          </CommentBox>
+          :
+          <></>
         }
       </ContentBox>
-    </Component>
+
+    </Component >
   );
 };
 

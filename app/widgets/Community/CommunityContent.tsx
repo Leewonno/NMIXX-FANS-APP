@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { CommunityBoard, CommunityImageBox } from '../../features';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setScrolled, setY } from '../../../store/scrollSlice';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AppText } from '../../shared';
-import { Animated } from 'react-native';
 import { AppDispatch } from '../../../store';
-// import { RootState } from '../../../store';
 
 // Props
 interface CommunityContentProps {
@@ -16,7 +14,6 @@ interface CommunityContentProps {
 
 const Box = styled.ScrollView`
   width: 100%;
-  /* height: auto; */
 `;
 
 const TabBox = styled.View`
@@ -67,7 +64,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
           }}>
           <Tab.Screen
             name="아티스트"
-            children={() => <CommunityBoard category="아티스트" />}
+            children={() => <CommunityBoard category="아티스트" community={name} />}
             options={{
               tabBarLabel: ({ focused }) => (
                 <AppText style={{
@@ -80,7 +77,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
             }} />
           <Tab.Screen
             name="팬"
-            children={() => <CommunityBoard category="팬" />}
+            children={() => <CommunityBoard category="팬" community={name} />}
             options={{
               tabBarLabel: ({ focused }) => (
                 <AppText style={{
@@ -95,7 +92,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
         </Tab.Navigator>
       </TabBox>
       {/* <CommunityTabBar /> */}
-      <CommunityBoard category='아티스트' />
+      <CommunityBoard category='아티스트' community={name} />
     </Box>
   );
 };

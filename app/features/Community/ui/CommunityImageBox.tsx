@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/native';
 import lily from '../../../../assets/imgs/lily.webp';
 import haewon from '../../../../assets/imgs/haewon.webp';
@@ -55,7 +55,15 @@ const CommunityImageBox = ({ name }: BoxProps) => {
   // 기기 가로 길이
   const screenWidth = Dimensions.get('window').width;
 
+  // 첫 렌더링에는 배경색 초기화
+  const isFirstRender = useRef<boolean>(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // 처음 렌더링일 때는 실행하지 않고 종료
+    }
+
     setOpacity(Math.max(0, Math.min(1, 1 - y / screenWidth)));
   }, [y])
 
