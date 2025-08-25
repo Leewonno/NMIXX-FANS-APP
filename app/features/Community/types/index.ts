@@ -1,19 +1,32 @@
+interface CommunityItemProps {
+    id: number;
+    content: string;
+    createdAt: string;
+    img01: string;
+    img02: string;
+    img03: string;
+    img04: string;
+    img05: string;
+    member: MemberProps;
+    boardComments: BoardCommentProps[];
+};
+
 interface CommunityItemListProps {
     id: number;
     content: string;
     createdAt: string;
     img01: string;
-    member: CommunityItemListMemberProps;
-    boardComment: CommunityItemListBoardCommentProps;
+    member: MemberProps;
+    boardComment: BoardCommentProps;
 };
 
-interface CommunityItemListBoardCommentProps {
+interface BoardCommentProps {
     id: number,
     comment: string,
-    member: CommunityItemListMemberProps,
+    member: MemberProps,
 }
 
-interface CommunityItemListMemberProps {
+interface MemberProps {
     id: number;
     // name: string;
     nick: string;

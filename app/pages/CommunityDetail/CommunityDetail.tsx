@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { AppText, RootStackParamList } from '../../shared';
 import { CommunityDetailHeader } from '../../widgets';
+import { CommunityComment, CommunityDetailItem } from '../../features/Community';
 
 type CommunityProps = {
   route: RouteProp<RootStackParamList, 'CommunityDetail'>;
@@ -20,7 +21,9 @@ const CommunityDetail = ({ route, navigation }: CommunityProps) => {
   return (
     <Box>
       <CommunityDetailHeader />
-      <AppText>{id}</AppText>
+      <CommunityDetailItem id={id} />
+      <CommunityComment />
+      {/* <AppText>{id}</AppText> */}
     </Box>
   );
 };

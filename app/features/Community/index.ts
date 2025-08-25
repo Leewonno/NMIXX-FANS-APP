@@ -1,3 +1,5 @@
 export { CommunityProfileBox } from './ui'
 export { CommunityImageBox } from './ui'
 export { CommunityBoard } from './components'
+export { CommunityDetailItem } from './components'
+export { CommunityComment } from './components'

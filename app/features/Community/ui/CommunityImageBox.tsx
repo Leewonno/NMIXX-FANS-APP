@@ -103,7 +103,7 @@ const CommunityImageBox = ({ name }: BoxProps) => {
                 name === 'BAE' ? bae :
                   name === 'JIWOO' ? jiwoo :
                     name === 'KYUJIN' ? kyujin :
-                      kyujin} />
+                    jiwoo} />
       </ImageBox>
       <LinkBox>
         <Pressable onPress={() => handlePress("www.youtube.com/@NMIXXOfficial", "yt")}>
