@@ -92,7 +92,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const ContentImage = styled.Image`
   width: 100%;
-  height: ${screenWidth - 70}px;
+  height: ${screenWidth - 60}px;
   object-fit: cover;
   border-radius: 7.5px;
 `

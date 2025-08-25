@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StyleSheet } from 'react-native';
-import { Community, CommunityDetail, Home } from './app/pages';
+import { Community, CommunityDetail, Home, Login, Profile, SignUp } from './app/pages';
 import { RootStackParamList } from './app/shared';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -29,6 +29,21 @@ function App() {
               <Stack.Screen
                 name="Home"
                 component={Home}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Profile"
+                component={Profile}
                 options={{ headerShown: false }}
               />
               <Stack.Screen

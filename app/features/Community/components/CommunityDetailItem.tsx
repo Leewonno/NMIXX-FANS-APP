@@ -14,7 +14,7 @@ interface ComponentProps {
 const Component = styled.ScrollView`
   margin-top: 70px;
   margin-bottom: 70px;
-  padding: 0px 20px;
+  padding: 0px 15px;
 `;
 
 const ProfileBox = styled.View`
@@ -72,7 +72,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const ContentImage = styled.Image`
   width: 100%;
-  height: ${screenWidth - 70}px;
+  height: ${screenWidth - 40}px;
   object-fit: cover;
   border-radius: 7.5px;
 `

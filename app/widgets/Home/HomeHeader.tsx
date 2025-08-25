@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { AppText } from '../../shared';
+import logo from '../../../assets/imgs/nmixxfans.png';
 
 // Props
 interface HomeHeaderProps {
@@ -21,14 +22,20 @@ const LogoText = styled(AppText)`
   letter-spacing: -2px;
 `
 
+const LogoImage = styled.Image`
+  width: 200px;
+  object-fit: contain;
+`
+
 const HomeHeader = ({ }: HomeHeaderProps) => {
 
   return (
     <Box>
       <LogoBox>
-        <LogoText>
+        <LogoImage source={logo} />
+        {/* <LogoText>
           NMIXX FANS
-        </LogoText>
+        </LogoText> */}
       </LogoBox>
     </Box>
   );

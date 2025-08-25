@@ -1,3 +1,6 @@
 export { Home } from './Home'
 export { Community } from './Community'
 export { CommunityDetail } from './CommunityDetail'
+export { Login } from './Login'
+export { SignUp } from './SignUp'
+export { Profile } from './Profile'

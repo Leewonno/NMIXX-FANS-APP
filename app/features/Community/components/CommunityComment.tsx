@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import SendIcon from '../../../../assets/icons/send.svg'
 import { KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Props
 interface ComponentProps {
@@ -42,18 +42,21 @@ const CommentIconBox = styled.View`
 const CommunityComment = ({ }: ComponentProps) => {
   const insets = useSafeAreaInsets();
   return (
+
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={{ flex: 1 }}
     >
-      <SafeAreaView>
-        <Component> 
-          <CommentInput placeholder='댓글을 입력해 주세요' />
-          <CommentIconBox>
-            <SendIcon width={25} height={25} stroke={'#e9e9e9'} />
-          </CommentIconBox>
-        </Component>
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView>
+          <Component>
+            <CommentInput placeholder='댓글을 입력해 주세요' />
+            <CommentIconBox>
+              <SendIcon width={25} height={25} stroke={'#e9e9e9'} />
+            </CommentIconBox>
+          </Component>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </KeyboardAvoidingView>
   );
 };

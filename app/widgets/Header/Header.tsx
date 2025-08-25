@@ -28,7 +28,7 @@ const Header = ({ }: HeaderProps) => {
     <Box>
       <LogoBox>
         <LogoText>
-          We are FANS
+          {/* We are FANS */}
         </LogoText>
       </LogoBox>
     </Box>

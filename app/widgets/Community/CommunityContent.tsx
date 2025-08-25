@@ -18,8 +18,8 @@ const Box = styled.ScrollView`
 
 const TabBox = styled.View`
   width: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-top: 50px;
   border-bottom-width: 1px;
   border-bottom-color: #f0f0f0;
