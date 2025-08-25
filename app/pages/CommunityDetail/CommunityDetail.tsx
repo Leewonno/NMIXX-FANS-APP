@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import styled from 'styled-components/native';
 import { AppText, RootStackParamList } from '../../shared';
-import { CommunityHeader } from '../../widgets';
+import { CommunityDetailHeader } from '../../widgets';
 
 type CommunityProps = {
   route: RouteProp<RootStackParamList, 'CommunityDetail'>;
@@ -19,7 +19,7 @@ const CommunityDetail = ({ route, navigation }: CommunityProps) => {
   
   return (
     <Box>
-      <CommunityHeader />
+      <CommunityDetailHeader />
       <AppText>{id}</AppText>
     </Box>
   );

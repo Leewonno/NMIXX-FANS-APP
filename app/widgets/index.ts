@@ -11,3 +11,6 @@ export { HomeCommunity } from './Home'
 export { CommunityHeader } from './Community'
 export { CommunityContent } from './Community'
 export { CommunityTabBar } from './Community'
+
+// CommunityDetail
+export { CommunityDetailHeader } from './Community'

@@ -26,6 +26,7 @@ const CommunityProfileBox = ({ }: BoxProps) => {
 
   return (
     <Box>
+      {/* 버튼 누르면 프로필 창으로 이동 시키면 됨 */}
       <ProfileButton>
         <ProfileImage source={lily}/>
       </ProfileButton>
