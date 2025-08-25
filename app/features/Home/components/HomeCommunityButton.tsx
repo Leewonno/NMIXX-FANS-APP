@@ -4,6 +4,8 @@ import React from 'react';
 import { ImageSourcePropType, Pressable } from 'react-native';
 import styled from 'styled-components/native';
 import { RootStackParamList } from '../../../shared';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 type CommunityScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -41,12 +43,19 @@ const CommunityButtonText = styled.Text`
 
 const HomeCommunityButton = ({ name, img }: HomeCommunityButtonProps) => {
   const navigation = useNavigation<CommunityScreenNavigationProp>();
+  const token = useSelector((state: RootState) => state.auth.token);
+
+  const handlePress = ()=>{
+    if (token) {
+      navigation.navigate('Community', { name })
+      return;
+    }
+    navigation.navigate('Login');
+  }
 
   return (
     <CommunityButton
-      onPress={() =>
-        navigation.navigate('Community', { name })
-      }
+      onPress={handlePress}
     >
       <CommunityButtonImage
         source={img}

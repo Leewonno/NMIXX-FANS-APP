@@ -2,15 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 // Props
-type LoginProps = {
+type SignUpProps = {
 };
 
 const Box = styled.View`
-  width: 100%;
-  height: 100%;
 `;
 
-const Login = ({ }: LoginProps) => {
+const SignUp = ({ }: SignUpProps) => {
 
   return (
     <Box>
@@ -18,4 +16,4 @@ const Login = ({ }: LoginProps) => {
   );
 };
 
-export { Login };
+export { SignUp };

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import scrollReducer from './scrollSlice';
+import authReducer from './authSlice';
 
 export const store = configureStore({
   reducer: {
     scroll: scrollReducer,
+    auth: authReducer,
   },
 });
 
