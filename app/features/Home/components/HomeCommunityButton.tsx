@@ -43,10 +43,10 @@ const CommunityButtonText = styled.Text`
 
 const HomeCommunityButton = ({ name, img }: HomeCommunityButtonProps) => {
   const navigation = useNavigation<CommunityScreenNavigationProp>();
-  const token = useSelector((state: RootState) => state.auth.token);
+  const verify = useSelector((state: RootState) => state.auth.verify);
 
   const handlePress = ()=>{
-    if (token) {
+    if (verify) {
       navigation.navigate('Community', { name })
       return;
     }
