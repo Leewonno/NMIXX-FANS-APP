@@ -1,97 +1,109 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# KCommunity: NMIXX FANS
 
-# Getting Started
+## 소개
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+KCommunity는 K-POP 팬들을 위해 특별히 제작된 모바일 커뮤니티 애플리케이션입니다. 이 앱은 팬들이 좋아하는 아티스트에 대한 정보를 공유하고, 서로 소통하며, 다양한 팬 활동을 함께 할 수 있는 활기찬 온라인 공간을 제공합니다.
 
-## Step 1: Start Metro
+## 주요 기능
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+*   **커뮤니티 게시판**: "아티스트" 및 "팬" 카테고리로 분류된 게시판을 통해 다양한 주제의 게시물들을 탐색하고, 새로운 게시물을 작성할 수 있습니다. 각 게시판은 특정 관심사에 맞춰 팬들 간의 교류를 활성화합니다.
+*   **게시물 상세 보기 및 댓글**: 개별 게시물을 선택하면 게시물의 전체 내용, 작성자 정보, 그리고 다른 팬들의 댓글을 확인할 수 있습니다. 게시물에 직접 댓글을 작성하여 의견을 공유할 수 있습니다.
+*   **사용자 인증 시스템**: 안전하고 간편한 로그인 및 회원가입 기능을 통해 모든 사용자가 앱의 모든 기능을 이용할 수 있도록 지원합니다.
+*   **개인 프로필 관리**: 사용자 개인 프로필을 설정하고 관리할 수 있어, 자신을 표현하고 다른 사용자들에게 자신을 소개할 수 있습니다.
+*   **이미지 첨부**: 게시물 작성 시 이미지를 첨부하여 더욱 풍부하고 시각적인 콘텐츠를 공유할 수 있습니다.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 사용 기술
+
+*   **React Native**: 크로스 플랫폼 모바일 애플리케이션 개발을 위한 프레임워크입니다.
+*   **TypeScript**: 정적 타입 체크를 통해 코드의 안정성과 가독성을 높입니다.
+*   **Styled-components**: React Native 컴포넌트에 스타일을 적용하는 데 사용되는 CSS-in-JS 라이브러리입니다.
+*   **React Navigation**: 앱 내 화면 전환 및 내비게이션을 관리합니다. (Material Top Tab Navigator, Native Stack Navigator)
+*   **Redux Toolkit**: 애플리케이션의 상태 관리를 효율적으로 수행합니다. 특히 사용자 인증 토큰 관리에 활용됩니다.
+*   **GraphQL**: API 통신을 위한 쿼리 언어로, 서버로부터 필요한 데이터를 효율적으로 가져오고 업데이트합니다.
+
+## 설치 및 실행
+
+이 프로젝트를 로컬 환경에서 설정하고 실행하는 방법입니다.
+
+### 1. 환경 설정
+
+React Native 개발 환경이 설정되어 있지 않다면, [React Native 공식 문서](https://reactnative.dev/docs/set-up-your-environment)의 "Set Up Your Environment" 가이드를 따라 개발 환경을 설정해주세요.
+
+### 2. 종속성 설치
+
+프로젝트의 루트 디렉토리에서 다음 명령어를 실행하여 필요한 종속성을 설치합니다:
 
 ```sh
-# Using npm
+# npm 사용 시
+npm install
+
+# 또는 Yarn 사용 시
+yarn install
+```
+
+### 3. Metro Bundler 실행
+
+React Native 애플리케이션의 JavaScript 코드를 번들링하는 Metro Bundler를 시작합니다.
+
+```sh
+# npm 사용 시
 npm start
 
-# OR using Yarn
+# 또는 Yarn 사용 시
 yarn start
 ```
 
-## Step 2: Build and run your app
+### 4. 애플리케이션 빌드 및 실행
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+새로운 터미널 창을 열고, 다음 명령어 중 하나를 사용하여 Android 또는 iOS 앱을 빌드하고 실행합니다.
 
-### Android
+#### Android
 
 ```sh
-# Using npm
+# npm 사용 시
 npm run android
 
-# OR using Yarn
+# 또는 Yarn 사용 시
 yarn android
 ```
 
-### iOS
+#### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+iOS의 경우, CocoaPods 종속성을 설치해야 합니다. (최초 클론 시 또는 네이티브 종속성 업데이트 시에만 실행)
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+1.  CocoaPods 설치:
+    ```sh
+    bundle install
+    ```
+2.  Pod 종속성 설치:
+    ```sh
+    bundle exec pod install
+    ```
 
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+이제 iOS 앱을 실행합니다:
 
 ```sh
-# Using npm
+# npm 사용 시
 npm run ios
 
-# OR using Yarn
+# 또는 Yarn 사용 시
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+모든 설정이 올바르게 완료되면, Android 에뮬레이터, iOS 시뮬레이터 또는 연결된 실제 기기에서 앱이 실행되는 것을 볼 수 있습니다.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 사용법
 
-## Step 3: Modify your app
+1.  앱을 실행한 후, 로그인 화면이 나타납니다. 기존 계정으로 **로그인**하거나 **회원가입**을 통해 새로운 계정을 생성할 수 있습니다.
+2.  로그인 성공 후, 메인 화면으로 이동합니다. 하단 탭 바를 통해 **홈**, **커뮤니티**, **프로필** 등의 주요 섹션을 탐색할 수 있습니다.
+3.  **커뮤니티** 섹션에서는 "아티스트" 또는 "팬" 게시판을 선택하여 게시물 목록을 확인하고 상호작용할 수 있습니다.
+4.  게시물을 탭하여 상세 내용을 확인하고 댓글을 작성할 수 있습니다.
 
-Now that you have successfully run the app, let's make changes!
+## 파일 구조 개요
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+`app/` 디렉토리는 애플리케이션의 핵심 로직을 포함하며, 다음 세 가지 주요 폴더로 구성됩니다:
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+*   `features/`: 재사용 가능한 UI 컴포넌트와 비즈니스 로직을 포함하는 기능별 모듈입니다. (예: `Community`, `Home`)
+*   `pages/`: 애플리케이션의 각 화면을 정의하는 최상위 컴포넌트입니다. (예: `Community.tsx`, `Login.tsx`, `Profile.tsx`)
+*   `shared/`: 앱 전체에서 사용되는 공통 컴포넌트, 유틸리티 함수, API 서비스 및 타입 정의를 포함합니다.
+*   `widgets/`: 특정 페이지나 기능에 속하지만, 재사용될 수 있는 더 큰 UI 컴포넌트들을 모아둔 곳입니다. (예: `Community`, `Footer`, `Header`, `Home`)
