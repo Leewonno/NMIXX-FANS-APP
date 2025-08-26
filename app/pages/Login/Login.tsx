@@ -6,9 +6,9 @@ import { AppText, postData, RootStackParamList } from '../../shared';
 import { API_URL } from '@env';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { setToken } from '../../../store/authSlice';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Props
 type LoginProps = {
@@ -73,7 +73,7 @@ const Login = ({ }: LoginProps) => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Home'>>();
 
   const handleLoginButton = async () => {
@@ -87,7 +87,7 @@ const Login = ({ }: LoginProps) => {
     try {
       const data = await postData(API_URL, mutation);
       if (data.tokenAuth) {
-        dispatch(setToken(data.tokenAuth.token));
+        await AsyncStorage.setItem('token', data.tokenAuth.token);
         // 스택 리셋: Login 없애고 Home만 남김
         navigation.dispatch(
           CommonActions.reset({
@@ -96,10 +96,12 @@ const Login = ({ }: LoginProps) => {
           })
         );
       } else {
-        dispatch(setToken(''));
+        AsyncStorage.setItem('token', '');
+        Alert.alert('로그인 실패', '아이디 또는 비밀번호를 확인해주세요.');
       }
     } catch (error) {
-      dispatch(setToken(''));
+      AsyncStorage.setItem('token', '');
+      Alert.alert('로그인 실패', '아이디 또는 비밀번호를 확인해주세요.');
     }
   }
 
