@@ -4,8 +4,6 @@ import logo from '../../../assets/imgs/nmixxfans.png';
 import { Alert, Pressable } from 'react-native';
 import { AppText, postData, RootStackParamList } from '../../shared';
 import { API_URL } from '@env';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -73,8 +71,7 @@ const Login = ({ }: LoginProps) => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  // const dispatch = useDispatch<AppDispatch>();
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Home'>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Login'>>();
 
   const handleLoginButton = async () => {
     const mutation = `
@@ -115,7 +112,7 @@ const Login = ({ }: LoginProps) => {
         <LogoImage source={logo} />
       </LogoBox>
       <InputBox>
-        <Input placeholder='아이디' onChangeText={setId} value={id} autoCapitalize="none" />
+        <Input placeholder='아이디' autoCapitalize="none" onChangeText={setId} value={id} />
         <Input secureTextEntry={true} placeholder='비밀번호' value={password} onChangeText={setPassword} />
         <LoginButton onPress={handleLoginButton}>
           <LoginButtonText>로그인</LoginButtonText>

@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../store';
 import { postData } from '../../shared';
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setVerify } from '../../../store/authSlice';
+import { setId, setNick, setProfileImg, setVerify } from '../../../store/authSlice';
 
 // Props
 type HomeProps = {
@@ -22,7 +22,7 @@ const Home = ({ }: HomeProps) => {
     const verifyToken = async (token: string) => {
       const mutation = `
         mutation {
-          verifyToken(token: "${token}2s") {
+          verifyToken(token: "${token}") {
         		ok
             error
             user {
@@ -31,7 +31,6 @@ const Home = ({ }: HomeProps) => {
             }
             member {
               id
-              name
               nick
               profileImg
             }
@@ -47,16 +46,24 @@ const Home = ({ }: HomeProps) => {
       if (token) {
         try {
           const valid = await verifyToken(token); // 서버에 검증 요청
-          console.log(valid)
           if (valid) {
             if (valid.verifyToken.ok) {
-              dispatch(setVerify(valid.verifyToken.ok))
+              dispatch(setVerify(valid.verifyToken.ok));
+              dispatch(setId(valid.verifyToken.member.id));
+              dispatch(setNick(valid.verifyToken.member.nick));
+              dispatch(setProfileImg(valid.verifyToken.member.profileImg));
             } else {
-              dispatch(setVerify(valid.verifyToken.ok))
+              dispatch(setVerify(valid.verifyToken.ok));
+              dispatch(setId(null));
+              dispatch(setNick(""));
+              dispatch(setProfileImg(""));
             }
           }
         } catch (error) {
-          dispatch(setVerify(false))
+          dispatch(setVerify(false));
+          dispatch(setId(null));
+          dispatch(setNick(""));
+          dispatch(setProfileImg(""));
         }
       }
     };
