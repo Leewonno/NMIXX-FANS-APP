@@ -115,7 +115,7 @@ const Login = ({ }: LoginProps) => {
         <LogoImage source={logo} />
       </LogoBox>
       <InputBox>
-        <Input placeholder='아이디' onChangeText={setId} value={id} />
+        <Input placeholder='아이디' onChangeText={setId} value={id} autoCapitalize="none" />
         <Input secureTextEntry={true} placeholder='비밀번호' value={password} onChangeText={setPassword} />
         <LoginButton onPress={handleLoginButton}>
           <LoginButtonText>로그인</LoginButtonText>
