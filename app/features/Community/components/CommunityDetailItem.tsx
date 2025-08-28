@@ -253,7 +253,6 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
       `;
       try {
         const data = await getData(API_URL, query);
-        console.log(data)
         const board = data.board;
         if (board) {
           setItem(board);
