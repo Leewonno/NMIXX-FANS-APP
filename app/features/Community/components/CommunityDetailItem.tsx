@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { AppText, getData, RootStackParamList, timeAgo } from '../../../shared';
+import { AppText, getData, postData, RootStackParamList, timeAgo } from '../../../shared';
 import TranslateIcon from '../../../../assets/icons/translate.svg'
 import StarIcon from '../../../../assets/icons/star.svg'
-import { Alert, Dimensions } from 'react-native';
+import { Alert, Dimensions, Pressable } from 'react-native';
 import { API_URL } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LikeIcon from '../../../../assets/icons/favorite.svg'
+import EmptyLikeIcon from '../../../../assets/icons/favorite_empty.svg'
 
 // Props
 interface ComponentProps {
@@ -77,6 +80,21 @@ const ContentImage = styled.Image`
   border-radius: 7.5px;
 `
 
+const LikeBox = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+`
+
+const LikeButton = styled(Pressable)`
+`
+
+const LikeText = styled(AppText)`
+  color: #e5e5e5;
+  font-size: 16px;
+`
+
+
 const DivisionLine = styled.View`
   width: 100%;
   border-bottom-width: 1px;
@@ -132,6 +150,8 @@ const example: CommunityItemProps = {
   img03: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
   img04: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
   img05: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
+  like: 0,
+  isLiked: true,
   member: {
     id: 4,
     nick: "LILY",
@@ -165,17 +185,78 @@ const example: CommunityItemProps = {
 const CommunityDetailItem = ({ id }: ComponentProps) => {
 
   const [item, setItem] = useState<CommunityItemProps>(example);
+  const [newLike, setNewLike] = useState<number | null>(null);
+  const [newIsLiked, setNewIsLiked] = useState<boolean | null>(null);
+
+  const handleLike = async () => {
+    const token = await AsyncStorage.getItem('token');
+
+    const mutation = `
+      mutation {
+        updateBoardLike(boardId:${id}, token:"${token}") {
+          ok
+          status
+          like
+          error
+        }
+      }
+    `
+    const data = await postData(API_URL, mutation);
+    const res = data.updateBoardLike;
+    if (res) {
+      if (res.ok) {
+        setNewIsLiked(res.status);
+        setNewLike(res.like);
+      }
+      return;
+    } else {
+      Alert.alert('문제가 발생했습니다.')
+    }
+  }
 
   useEffect(() => {
     const fetchGraphQL = async () => {
+      const token = await AsyncStorage.getItem('token');
       // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
       const query = `
+        query {
+          board(boardId: ${id}, token:"${token}") {
+            id
+            title
+            content
+            createdAt
+            img01
+            img02
+            img03
+            img04
+            img05
+            isLiked
+            like
+            member {
+              id
+              name
+              nick
+              profileImg
+            }
+            boardComments {
+              id
+              comment
+              member {
+                id
+                name
+                nick
+                profileImg
+              }
+            }
+          }
+        }
       `;
       try {
         const data = await getData(API_URL, query);
-        console.log(data)
-        if (data) {
-          setItem(data.boards)
+        const board = data.board;
+        if (board) {
+          setItem(board);
+          return;
         }
       } catch (error) {
         setItem(example);
@@ -209,6 +290,30 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
         {
           item.img01 ? <ContentImage source={{ uri: item.img01 }} /> : <></>
         }
+        {/* 좋아요 */}
+        <LikeBox>
+          <LikeButton onPress={() => { handleLike() }}>
+            {
+              newIsLiked !== null
+                ? (newIsLiked
+                  ? <LikeIcon width={20} height={20} fill="#528cff" />
+                  : <EmptyLikeIcon width={20} height={20} fill="#c0c0c0" />)
+                : (item.isLiked
+                  ? <LikeIcon width={20} height={20} fill="#528cff" />
+                  : <EmptyLikeIcon width={20} height={20} fill="#c0c0c0" />)
+            }
+          </LikeButton>
+          <LikeText style={
+            newIsLiked !== null
+              ? (newIsLiked ? { fontWeight: '600', color: '#528cff' } : {})
+              :
+              (item.isLiked ? { fontWeight: '600', color: '#528cff' } : {})
+          }>
+            {
+              newLike !== null ? newLike : item.like
+            }
+          </LikeText>
+        </LikeBox>
         <CommentBoxTitle>댓글</CommentBoxTitle>
         {item.boardComments ?
           item.boardComments.map((v, i) => {

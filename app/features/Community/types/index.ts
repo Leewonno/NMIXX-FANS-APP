@@ -9,6 +9,8 @@ interface CommunityItemProps {
     img05: string;
     member: MemberProps;
     boardComments: BoardCommentProps[];
+    like: number;
+    isLiked: boolean;
 };
 
 interface CommunityItemListProps {
@@ -18,6 +20,8 @@ interface CommunityItemListProps {
     img01: string;
     member: MemberProps;
     boardComment: BoardCommentProps;
+    isLiked: boolean;
+    like: number;
 };
 
 interface BoardCommentProps {
