@@ -64,7 +64,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
           }}>
           <Tab.Screen
             name="아티스트"
-            children={() => <CommunityBoard category="아티스트" community={name} />}
+            children={() => <></>}
             options={{
               tabBarLabel: ({ focused }) => (
                 <AppText style={{
@@ -77,7 +77,7 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
             }} />
           <Tab.Screen
             name="팬"
-            children={() => <CommunityBoard category="팬" community={name} />}
+            children={() => <></>}
             options={{
               tabBarLabel: ({ focused }) => (
                 <AppText style={{

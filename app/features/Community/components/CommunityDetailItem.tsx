@@ -8,6 +8,8 @@ import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LikeIcon from '../../../../assets/icons/favorite.svg'
 import EmptyLikeIcon from '../../../../assets/icons/favorite_empty.svg'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 // Props
 interface ComponentProps {
@@ -184,6 +186,8 @@ const example: CommunityItemProps = {
 
 const CommunityDetailItem = ({ id }: ComponentProps) => {
 
+  const refresh = useSelector((state: RootState) => state.page.refresh);
+
   const [item, setItem] = useState<CommunityItemProps>(example);
   const [newLike, setNewLike] = useState<number | null>(null);
   const [newIsLiked, setNewIsLiked] = useState<boolean | null>(null);
@@ -214,57 +218,62 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
     }
   }
 
-  useEffect(() => {
-    const fetchGraphQL = async () => {
-      const token = await AsyncStorage.getItem('token');
-      // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
-      const query = `
-        query {
-          board(boardId: ${id}, token:"${token}") {
+  const fetchGraphQL = async () => {
+    const token = await AsyncStorage.getItem('token');
+    // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
+    const query = `
+      query {
+        board(boardId: ${id}, token:"${token}") {
+          id
+          title
+          content
+          createdAt
+          img01
+          img02
+          img03
+          img04
+          img05
+          isLiked
+          like
+          member {
             id
-            title
-            content
-            createdAt
-            img01
-            img02
-            img03
-            img04
-            img05
-            isLiked
-            like
+            name
+            nick
+            profileImg
+          }
+          boardComments {
+            id
+            comment
             member {
               id
               name
               nick
               profileImg
             }
-            boardComments {
-              id
-              comment
-              member {
-                id
-                name
-                nick
-                profileImg
-              }
-            }
           }
         }
-      `;
-      try {
-        const data = await getData(API_URL, query);
-        const board = data.board;
-        if (board) {
-          setItem(board);
-          return;
-        }
-      } catch (error) {
-        setItem(example);
       }
-    };
+    `;
+    try {
+      const data = await getData(API_URL, query);
+      const board = data.board;
+      if (board) {
+        setItem(board);
+        return;
+      }
+    } catch (error) {
+      setItem(example);
+    }
+  };
 
+  // useEffect(() => {
+  //   console.log("!")
+  //   fetchGraphQL();
+  // }, []);
+
+  useEffect(()=>{
     fetchGraphQL();
-  }, []);
+  }, [refresh])
 
   return (
     <Component>

@@ -2,7 +2,7 @@ import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import styled from 'styled-components/native';
-import { AppText, RootStackParamList } from '../../shared';
+import { RootStackParamList } from '../../shared';
 import { CommunityDetailHeader } from '../../widgets';
 import { CommunityComment, CommunityDetailItem } from '../../features/Community';
 
@@ -22,7 +22,7 @@ const CommunityDetail = ({ route, navigation }: CommunityProps) => {
     <Box>
       <CommunityDetailHeader />
       <CommunityDetailItem id={id} />
-      <CommunityComment />
+      <CommunityComment id={id} />
       {/* <AppText>{id}</AppText> */}
     </Box>
   );

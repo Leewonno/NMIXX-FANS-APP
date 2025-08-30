@@ -8,6 +8,9 @@ import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { setRefresh } from '../../../store/pageSlice';
 
 // Props
 type CreateProps = {
@@ -117,6 +120,8 @@ const ImageSelectButton = styled(Pressable)`
 const Create = ({ route }: CreateProps) => {
   const { community } = route.params;
 
+  const dispatch = useDispatch<AppDispatch>();
+  const refresh = useSelector((state: RootState) => state.page.refresh);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Create'>>();
 
   const [imgList, setImgList] = useState<(string | null | undefined)[]>([]);
@@ -183,6 +188,10 @@ const Create = ({ route }: CreateProps) => {
   }
 
   const handleSave = async () => {
+    if (!content) {
+      Alert.alert('내용을 입력해 주세요.');
+    }
+
     const token = await AsyncStorage.getItem('token');
 
     const fields: string[] = [
@@ -211,6 +220,7 @@ const Create = ({ route }: CreateProps) => {
       if (data && data.createBoard) {
         if (data.createBoard.ok) {
           navigation.goBack();
+          dispatch(setRefresh(!refresh))
           return;
         } else {
           Alert.alert('문제가 발생했습니다.');
