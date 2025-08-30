@@ -40,7 +40,23 @@ JYP 엔터테인먼트의 자회사 Blue Garage에서 개발·운영하는 **FAN
 ### 5-4. 로그인/회원가입
 <img width="1920" height="1080" alt="nmixxfans_login" src="https://github.com/user-attachments/assets/e4a2db6d-1d4a-44d0-b553-6c3e41e66803" />
 
-## 6. 앱 사용 화면 시연
+## 6. 앱 사용 시연 영상
+### 6-1. 회원가입/로그인/로그아웃
 <a href="https://youtu.be/ynX9DmGF_gU" target="_blank">
   <img src="http://img.youtube.com/vi/ynX9DmGF_gU/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-2. 게시판 게시글 보기/댓글 작성/좋아요
+<a href="https://youtu.be/zXaokIdoMc0" target="_blank">
+  <img src="http://img.youtube.com/vi/zXaokIdoMc0/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-3. 게시글 작성/이미지 업로드
+<a href="https://youtu.be/58W6WkwfIas" target="_blank">
+  <img src="http://img.youtube.com/vi/58W6WkwfIas/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-4. 어제의 인기글
+<a href="https://youtu.be/8lR5xPqHpIc" target="_blank">
+  <img src="http://img.youtube.com/vi/8lR5xPqHpIc/maxresdefault.jpg" alt="Video Label" />
 </a>
