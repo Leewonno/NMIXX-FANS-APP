@@ -106,7 +106,6 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
           />
         </Tab.Navigator>
       </TabBox>
-      {/* <CommunityTabBar /> */}
       {routeName == '아티스트' ?
         <CommunityBoard category='아티스트' community={name} />
         :

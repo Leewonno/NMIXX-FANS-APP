@@ -4,6 +4,7 @@ import styled from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../types"
+import { HomeStackParamList } from "../types/stack"
 
 type ButtonProps = {
 }
@@ -14,11 +15,11 @@ const CustomBackButton = styled(Pressable)`
 
 const BackBlackButton = ({ }: ButtonProps) => {
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'CommunityDetail'>>();
+  const homeNavigation = useNavigation<NativeStackNavigationProp<HomeStackParamList, 'CommunityDetail'>>();
 
   const handlePressBack = () => {
-    if (navigation?.canGoBack()) {
-      navigation.goBack();
+    if (homeNavigation?.canGoBack()) {
+      homeNavigation.goBack();
     }
   }
 

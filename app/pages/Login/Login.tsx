@@ -71,7 +71,7 @@ const Login = ({ }: LoginProps) => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Login'>>();
+  const rootNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Login'>>();
 
   const handleLoginButton = async () => {
     const mutation = `
@@ -86,10 +86,10 @@ const Login = ({ }: LoginProps) => {
       if (data.tokenAuth) {
         await AsyncStorage.setItem('token', data.tokenAuth.token);
         // 스택 리셋: Login 없애고 Home만 남김
-        navigation.dispatch(
+        rootNavigation.dispatch(
           CommonActions.reset({
             index: 0,
-            routes: [{ name: 'Home' }],
+            routes: [{ name: 'Main' }],
           })
         );
       } else {
@@ -104,7 +104,7 @@ const Login = ({ }: LoginProps) => {
   }
 
   const handleSignUpButton = () => {
-    navigation.navigate('SignUp');
+    rootNavigation.navigate('SignUp');
   }
 
   return (

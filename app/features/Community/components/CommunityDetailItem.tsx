@@ -184,24 +184,7 @@ const example: CommunityItemProps = {
     }
   ]
 }
-// interface CarouselItemContainerProps {
-//   width: number;
-// }
 
-// const CarouselItemContainer = styled.View<CarouselItemContainerProps>`
-//   width: ${props => props.width}px;
-//   /* height: 100%; */
-//   /* padding: 20px; */
-// `;
-
-// interface CarouselItemProps {
-//   color: string;
-// }
-
-const CarouselItem = styled.View<CarouselItemProps>`
-  flex: 1;
-  background-color: ${props => props.color};
-`;
 const CommunityDetailItem = ({ id }: ComponentProps) => {
 
   const refresh = useSelector((state: RootState) => state.page.refresh);
@@ -290,15 +273,6 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
     fetchGraphQL();
   }, [refresh])
 
-  // const [itemWidth, setItemWidth] = useState(0);
-  // const renderItem = ({ item }: { item: string }) => {
-  //   return (
-  //     <CarouselItemContainer key={item} width={itemWidth}>
-  //       <ContentImage source={{ uri: item }} />
-  //     </CarouselItemContainer>
-  //   );
-  // };
-
   return (
     <Component>
       {/* 프로필 박스 */}
@@ -335,34 +309,12 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
           :
           <></>
         } */}
-
-        {/* <FlatList
-          data={images}
-          horizontal
-          renderItem={({ item }) => (
-            <TouchableOpacity>
-              <ContentImage source={{ uri: item }} resizeMode="cover" />
-            </TouchableOpacity>
-          )}
-          keyExtractor={(_, index) => String(index)}
-        /> */}
         {/* 
         <FlatList
           data={images}
           keyExtractor={item => item}
           renderItem={renderItem}
           horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          onContentSizeChange={w => setItemWidth(w / images.length)}
-        /> */}
-
-        {/* <FlatList
-          data={images}
-          keyExtractor={item => item}
-          renderItem={renderItem}
-          horizontal
-          contentContainerStyle={{ width: `${100 * images.length}%` }}
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           onContentSizeChange={w => setItemWidth(w / images.length)}

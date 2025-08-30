@@ -1,10 +1,14 @@
-export type RootStackParamList = {
+export type HomeStackParamList = {
     Home: undefined;
     Community: { name: string };
     CommunityDetail: { id: number };
+    Create: { community: string };
+    Profile: undefined;
+}
+
+export type RootStackParamList = {
     Login: undefined;
     SignUp: undefined;
-    Profile: undefined;
-    Create: { community: string };
     My: undefined;
+    Main: undefined;
 };

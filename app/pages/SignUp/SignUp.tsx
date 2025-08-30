@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import { AppText, postData, RootStackParamList } from '../../shared';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_URL } from '@env';
 
 // Props
@@ -65,7 +64,7 @@ const SignUp = ({ }: SignUpProps) => {
   const [password, setPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'SignUp'>>();
+  const rootNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'SignUp'>>();
 
   const handleSignUpButton = async () => {
     // 아이디 입력 확인
@@ -110,7 +109,7 @@ const SignUp = ({ }: SignUpProps) => {
       if (data.createUser) {
         if (data.createUser.ok) {
           // 스택 리셋: Login 없애고 Home만 남김
-          navigation.dispatch(
+          rootNavigation.dispatch(
             CommonActions.reset({
               index: 0,
               routes: [{ name: 'Login' }],
@@ -127,8 +126,8 @@ const SignUp = ({ }: SignUpProps) => {
   }
 
   const handleBackButton = () => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
+    if (rootNavigation.canGoBack()) {
+      rootNavigation.goBack();
     }
   }
 

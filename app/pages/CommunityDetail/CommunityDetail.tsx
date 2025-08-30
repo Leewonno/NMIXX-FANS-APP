@@ -2,13 +2,13 @@ import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../shared';
 import { CommunityDetailHeader } from '../../widgets';
 import { CommunityComment, CommunityDetailItem } from '../../features/Community';
+import { HomeStackParamList } from '../../shared/types/stack';
 
 type CommunityProps = {
-  route: RouteProp<RootStackParamList, 'CommunityDetail'>;
-  navigation: NativeStackNavigationProp<RootStackParamList, 'CommunityDetail'>;
+  route: RouteProp<HomeStackParamList, 'CommunityDetail'>;
+  navigation: NativeStackNavigationProp<HomeStackParamList, 'CommunityDetail'>;
 };
 
 const Box = styled.View`

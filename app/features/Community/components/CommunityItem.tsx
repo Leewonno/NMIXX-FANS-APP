@@ -10,9 +10,10 @@ import LikeIcon from '../../../../assets/icons/favorite.svg'
 import EmptyLikeIcon from '../../../../assets/icons/favorite_empty.svg'
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { HomeStackParamList } from '../../../shared/types/stack';
 
 type CommunityDetailNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+  HomeStackParamList,
   'CommunityDetail'
 >;
 

@@ -73,15 +73,12 @@ const CommunityComment = ({ id }: ComponentProps) => {
     `
     try {
       const data = await postData(API_URL, mutation);
-      console.log(data);
-
       if (data && data.createComment.ok) {
         dispatch(setRefresh(!refresh))
         setComment(""); // 입력 필드 초기화
       }
-
     } catch (err) {
-
+      console.log(err)
     }
   }
 

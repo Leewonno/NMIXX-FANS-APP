@@ -6,10 +6,16 @@ import styled from 'styled-components/native';
 import { RootStackParamList } from '../../../shared';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
+import { HomeStackParamList } from '../../../shared/types/stack';
 
-type CommunityScreenNavigationProp = NativeStackNavigationProp<
+type HomeNavigationProp = NativeStackNavigationProp<
+  HomeStackParamList,
+  'Community'
+>;
+
+type RootNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  'Home'
+  'Main'
 >;
 
 // Props
@@ -42,15 +48,16 @@ const CommunityButtonText = styled.Text`
 `
 
 const HomeCommunityButton = ({ name, img }: HomeCommunityButtonProps) => {
-  const navigation = useNavigation<CommunityScreenNavigationProp>();
+  const homeNavigation = useNavigation<HomeNavigationProp>();
+  const rootNavigation = useNavigation<RootNavigationProp>();
   const verify = useSelector((state: RootState) => state.auth.verify);
 
-  const handlePress = ()=>{
+  const handlePress = () => {
     if (verify) {
-      navigation.navigate('Community', { name })
+      homeNavigation.navigate('Community', { name })
       return;
     }
-    navigation.navigate('Login');
+    rootNavigation.navigate('Login');
   }
 
   return (

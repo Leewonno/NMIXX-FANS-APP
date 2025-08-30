@@ -11,6 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { setRefresh } from '../../../store/pageSlice';
+import { HomeStackParamList } from '../../shared/types/stack';
 
 // Props
 type CreateProps = {
@@ -122,7 +123,7 @@ const Create = ({ route }: CreateProps) => {
 
   const dispatch = useDispatch<AppDispatch>();
   const refresh = useSelector((state: RootState) => state.page.refresh);
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Create'>>();
+  const homeNavigation = useNavigation<NativeStackNavigationProp<HomeStackParamList, 'Create'>>();
 
   const [imgList, setImgList] = useState<(string | null | undefined)[]>([]);
   const [img01, setImg01] = useState<string | null | undefined>(null);
@@ -219,7 +220,7 @@ const Create = ({ route }: CreateProps) => {
       const data = await postData(API_URL, mutation);
       if (data && data.createBoard) {
         if (data.createBoard.ok) {
-          navigation.goBack();
+          homeNavigation.goBack();
           dispatch(setRefresh(!refresh))
           return;
         } else {
