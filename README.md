@@ -1,109 +1,62 @@
-# NMIXXFANS
+# NMIXX FANS (엔믹스 팬즈)
 
-## 소개
+## 1. 소개
 
-NMIXXFANS 는 NMIXX 팬들을 위해 제작된 모바일 커뮤니티 애플리케이션입니다. 이 앱은 팬들이 좋아하는 아티스트에 대한 정보를 공유하고, 아티스트와 소통하며, 다양한 팬 활동을 함께 할 수 있는 온라인 공간을 제공합니다.
+JYP 엔터테인먼트의 자회사 Blue Garage에서 개발·운영하는 **FANS** 서비스를 기반으로 제작한 **NMIXX FANS** 서비스입니다. **React Native**로 앱을 개발했으며, 백엔드 서버는 **Django**와 **GraphQL**을 이용하여 구축했습니다.
 
-## 주요 기능
+## 2. 주요 기능
 
-*   **커뮤니티 게시판**: "아티스트" 및 "팬" 카테고리로 분류된 게시판을 통해 다양한 주제의 게시물들을 탐색하고, 새로운 게시물을 작성할 수 있습니다. 각 게시판은 특정 관심사에 맞춰 팬들 간의 교류를 활성화합니다.
-*   **게시물 상세 보기 및 댓글**: 개별 게시물을 선택하면 게시물의 전체 내용, 작성자 정보, 그리고 다른 팬들의 댓글을 확인할 수 있습니다. 게시물에 직접 댓글을 작성하여 의견을 공유할 수 있습니다.
-*   **사용자 인증 시스템**: 안전하고 간편한 로그인 및 회원가입 기능을 통해 모든 사용자가 앱의 모든 기능을 이용할 수 있도록 지원합니다.
-*   **개인 프로필 관리**: 사용자 개인 프로필을 설정하고 관리할 수 있어, 자신을 표현하고 다른 사용자들에게 자신을 소개할 수 있습니다.
-*   **이미지 첨부**: 게시물 작성 시 이미지를 첨부하여 더욱 풍부하고 시각적인 콘텐츠를 공유할 수 있습니다.
+*   **커뮤니티 게시판**: "아티스트" 와 "팬"으로 분류된 게시판을 통해 아티스트와 팬들 간의 교류를 활성화합니다.
+*   **게시글 상세 보기 및 댓글**: 게시물의 내용을 확인하고 댓글을 작성하여 소통할 수 있습니다.
+*   **개인 프로필 관리**: 개인 프로필을 설정하고 관리할 수 있습니다.
+*   **인기글 보기**: 전날 인기 게시글을 확인하며 소통을 강화합니다.
 
-## 사용 기술
+## 3. 사용 기술
+*   **React Native**: 모바일(크로스 플랫폼) 애플리케이션 개발을 위한 프레임워크
+*   **TypeScript**: JavaScript 정적 타입 체크
+*   **Styled-components**: React Native 컴포넌트 스타일 적용
+*   **Redux Toolkit**: 전역 상태 관리
+*   **GraphQL**: API 통신을 위한 쿼리 언어
 
-*   **React Native**: 크로스 플랫폼 모바일 애플리케이션 개발을 위한 프레임워크입니다.
-*   **TypeScript**: 정적 타입 체크를 통해 코드의 안정성과 가독성을 높입니다.
-*   **Styled-components**: React Native 컴포넌트에 스타일을 적용하는 데 사용되는 CSS-in-JS 라이브러리입니다.
-*   **React Navigation**: 앱 내 화면 전환 및 내비게이션을 관리합니다. (Material Top Tab Navigator, Native Stack Navigator)
-*   **Redux Toolkit**: 애플리케이션의 상태 관리를 효율적으로 수행합니다. 특히 사용자 인증 토큰 관리에 활용됩니다.
-*   **GraphQL**: API 통신을 위한 쿼리 언어로, 서버로부터 필요한 데이터를 효율적으로 가져오고 업데이트합니다.
-
-## 설치 및 실행
-
-이 프로젝트를 로컬 환경에서 설정하고 실행하는 방법입니다.
-
-### 1. 환경 설정
-
-React Native 개발 환경이 설정되어 있지 않다면, [React Native 공식 문서](https://reactnative.dev/docs/set-up-your-environment)의 "Set Up Your Environment" 가이드를 따라 개발 환경을 설정해주세요.
-
-### 2. 종속성 설치
-
-프로젝트의 루트 디렉토리에서 다음 명령어를 실행하여 필요한 종속성을 설치합니다:
-
-```sh
-# npm 사용 시
-npm install
-
-# 또는 Yarn 사용 시
-yarn install
-```
-
-### 3. Metro Bundler 실행
-
-React Native 애플리케이션의 JavaScript 코드를 번들링하는 Metro Bundler를 시작합니다.
-
-```sh
-# npm 사용 시
-npm start
-
-# 또는 Yarn 사용 시
-yarn start
-```
-
-### 4. 애플리케이션 빌드 및 실행
-
-새로운 터미널 창을 열고, 다음 명령어 중 하나를 사용하여 Android 또는 iOS 앱을 빌드하고 실행합니다.
-
-#### Android
-
-```sh
-# npm 사용 시
-npm run android
-
-# 또는 Yarn 사용 시
-yarn android
-```
-
-#### iOS
-
-iOS의 경우, CocoaPods 종속성을 설치해야 합니다. (최초 클론 시 또는 네이티브 종속성 업데이트 시에만 실행)
-
-1.  CocoaPods 설치:
-    ```sh
-    bundle install
-    ```
-2.  Pod 종속성 설치:
-    ```sh
-    bundle exec pod install
-    ```
-
-이제 iOS 앱을 실행합니다:
-
-```sh
-# npm 사용 시
-npm run ios
-
-# 또는 Yarn 사용 시
-yarn ios
-```
-
-모든 설정이 올바르게 완료되면, Android 에뮬레이터, iOS 시뮬레이터 또는 연결된 실제 기기에서 앱이 실행되는 것을 볼 수 있습니다.
-
-## 사용법
-
-1.  앱을 실행한 후, 로그인 화면이 나타납니다. 기존 계정으로 **로그인**하거나 **회원가입**을 통해 새로운 계정을 생성할 수 있습니다.
-2.  로그인 성공 후, 메인 화면으로 이동합니다. 하단 탭 바를 통해 **홈**, **커뮤니티**, **프로필** 등의 주요 섹션을 탐색할 수 있습니다.
-3.  **커뮤니티** 섹션에서는 "아티스트" 또는 "팬" 게시판을 선택하여 게시물 목록을 확인하고 상호작용할 수 있습니다.
-4.  게시물을 탭하여 상세 내용을 확인하고 댓글을 작성할 수 있습니다.
-
-## 파일 구조 개요
+## 4. 폴더 및 파일 구조
 
 `app/` 디렉토리는 애플리케이션의 핵심 로직을 포함하며, 다음 세 가지 주요 폴더로 구성됩니다:
 
-*   `features/`: 재사용 가능한 UI 컴포넌트와 비즈니스 로직을 포함하는 기능별 모듈입니다. (예: `Community`, `Home`)
-*   `pages/`: 애플리케이션의 각 화면을 정의하는 최상위 컴포넌트입니다. (예: `Community.tsx`, `Login.tsx`, `Profile.tsx`)
+*   `features/`: 재사용 가능한 UI 컴포넌트와 비즈니스 로직을 포함하는 기능별 모듈입니다.
+*   `pages/`: 애플리케이션의 각 화면을 정의하는 최상위 컴포넌트입니다
 *   `shared/`: 앱 전체에서 사용되는 공통 컴포넌트, 유틸리티 함수, API 서비스 및 타입 정의를 포함합니다.
-*   `widgets/`: 특정 페이지나 기능에 속하지만, 재사용될 수 있는 더 큰 UI 컴포넌트들을 모아둔 곳입니다. (예: `Community`, `Footer`, `Header`, `Home`)
+*   `widgets/`: 특정 페이지나 기능에 속하지만, 재사용될 수 있는 더 큰 UI 컴포넌트들을 모아둔 곳입니다.
+
+## 5. 화면 구성 및 기능 시연
+### 5-1. 메인스크린/탭구성
+<img width="1920" height="1080" alt="nmixxfans_home" src="https://github.com/user-attachments/assets/d34a98f8-d158-4ac3-a23b-f9e5e29b0173" />
+
+### 5-2. 게시판
+<img width="1920" height="1080" alt="nmixxfans_board" src="https://github.com/user-attachments/assets/e529383a-1de3-4b59-836d-c68d1ac62707" />
+
+### 5-3. 글쓰기/이미지업로드
+<img width="1920" height="1080" alt="nmixxfans_write" src="https://github.com/user-attachments/assets/e31e8add-66d7-4223-b2be-1fee14958fab" />
+
+### 5-4. 로그인/회원가입
+<img width="1920" height="1080" alt="nmixxfans_login" src="https://github.com/user-attachments/assets/e4a2db6d-1d4a-44d0-b553-6c3e41e66803" />
+
+## 6. 앱 사용 시연 영상
+### 6-1. 회원가입/로그인/로그아웃
+<a href="https://youtu.be/ynX9DmGF_gU" target="_blank">
+  <img src="http://img.youtube.com/vi/ynX9DmGF_gU/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-2. 게시판 게시글 보기/댓글 작성/좋아요
+<a href="https://youtu.be/zXaokIdoMc0" target="_blank">
+  <img src="http://img.youtube.com/vi/zXaokIdoMc0/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-3. 게시글 작성/이미지 업로드
+<a href="https://youtu.be/58W6WkwfIas" target="_blank">
+  <img src="http://img.youtube.com/vi/58W6WkwfIas/maxresdefault.jpg" alt="Video Label" />
+</a>
+
+### 6-4. 어제의 인기글
+<a href="https://youtu.be/8lR5xPqHpIc" target="_blank">
+  <img src="http://img.youtube.com/vi/8lR5xPqHpIc/maxresdefault.jpg" alt="Video Label" />
+</a>
