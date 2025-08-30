@@ -7,5 +7,6 @@ export const getData = async (url: string, query: string) => {
     body: JSON.stringify({ query }),
   });
   const json = await response.json();
+  console.log(json)
   return json.data;
 }

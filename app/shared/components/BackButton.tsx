@@ -3,10 +3,10 @@ import LeftIcon from '../../../assets/icons/left.svg'
 import styled from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { RootStackParamList } from "../types"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../store"
 import { useEffect, useRef } from "react"
+import { HomeStackParamList } from "../types/stack"
 
 type BackButtonProps = {
 }
@@ -16,7 +16,7 @@ const CustomBackButton = styled(Pressable)`
 
 const BackButton = ({ }: BackButtonProps) => {
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Community'>>();
+  const homeNavigation = useNavigation<NativeStackNavigationProp<HomeStackParamList, 'Community'>>();
   const scrolled = useSelector((state: RootState) => state.scroll.scrolled);
   const y: number = useSelector((state: RootState) => state.scroll.y);
   
@@ -31,14 +31,14 @@ const BackButton = ({ }: BackButtonProps) => {
   }, [y]);
 
   const handlePressBack = () => {
-    if (navigation?.canGoBack()) {
-      navigation.goBack();
+    if (homeNavigation?.canGoBack()) {
+      homeNavigation.goBack();
     }
   }
 
   return (
     <CustomBackButton onPress={handlePressBack}>
-      <LeftIcon width={20} height={20} strokeWidth={1} stroke={scrolled && !isFirstRender.current ? "#000" : "#fff"} />
+      <LeftIcon width={20} height={20} strokeWidth={1} fill={scrolled && !isFirstRender.current ? "#000" : "#fff"} />
     </CustomBackButton>
   )
 }

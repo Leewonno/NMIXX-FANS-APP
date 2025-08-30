@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../store';
 import { postData } from '../../shared';
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setId, setNick, setProfileImg, setVerify } from '../../../store/authSlice';
+import { setId, setNick, setProfileImg, setUsername, setVerify } from '../../../store/authSlice';
 
 // Props
 type HomeProps = {
@@ -52,11 +52,15 @@ const Home = ({ }: HomeProps) => {
               dispatch(setId(valid.verifyToken.member.id));
               dispatch(setNick(valid.verifyToken.member.nick));
               dispatch(setProfileImg(valid.verifyToken.member.profileImg));
+              dispatch(setUsername(valid.verifyToken.user.username));
+              return;
             } else {
               dispatch(setVerify(valid.verifyToken.ok));
               dispatch(setId(null));
               dispatch(setNick(""));
               dispatch(setProfileImg(""));
+              dispatch(setUsername(""));
+              return;
             }
           }
         } catch (error) {
@@ -64,6 +68,7 @@ const Home = ({ }: HomeProps) => {
           dispatch(setId(null));
           dispatch(setNick(""));
           dispatch(setProfileImg(""));
+          dispatch(setUsername(""));
         }
       }
     };

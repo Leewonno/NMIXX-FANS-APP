@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../../store"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { RootStackParamList } from "../../../shared"
+import { HomeStackParamList } from "../../../shared/types/stack"
 
 type BoxProps = {
 }
@@ -25,17 +25,17 @@ const ProfileImage = styled.Image`
   height: 100%;
   border-radius: 12.5px;
   object-fit: cover;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #cbcbcb;
 `
 
 const CommunityProfileBox = ({ }: BoxProps) => {
 
   const profileImg = useSelector((state: RootState) => state.auth.profileImg);
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Community'>>();
+  const homeNavigation = useNavigation<NativeStackNavigationProp<HomeStackParamList, 'Community'>>();
 
   const handlePress = ()=>{
-    navigation.navigate('Profile')
+    homeNavigation.navigate('Profile')
   }
 
   return (

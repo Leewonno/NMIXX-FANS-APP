@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import { BackButton } from '../../shared';
-import { CommunityCreateButton, CommunityProfileBox } from '../../features';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
-import { Animated, Dimensions } from 'react-native';
+import { CommunityCreateButton } from '../../features';
 
 // Props
 interface CommunityFooterProps {
+  community: string;
 };
 
 const Box = styled.View`
@@ -20,11 +17,11 @@ const Box = styled.View`
   padding: 20px;
 `;
 
-const CommunityFooter = ({ }: CommunityFooterProps) => {
+const CommunityFooter = ({ community }: CommunityFooterProps) => {
 
   return (
     <Box>
-      <CommunityCreateButton />
+      <CommunityCreateButton community={ community } />
     </Box>
   );
 };

@@ -4,6 +4,8 @@ import { CommunityItem } from './CommunityItem';
 import { getData } from '../../../shared';
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 // Props
 interface ComponentProps {
@@ -94,28 +96,37 @@ const example: CommunityItemListProps[] = [
 ]
 
 const CommunityItemList = ({ category, community }: ComponentProps) => {
-  const [itemList, setItemList] = useState<CommunityItemListProps[]>(example);
+  const refresh = useSelector((state: RootState) => state.page.refresh);
+  const [itemList, setItemList] = useState<CommunityItemListProps[]>([]);
+  const fetchGraphQL = async () => {
+    const token = await AsyncStorage.getItem('token');
 
-  useEffect(() => {
-    const fetchGraphQL = async () => {
-      const token = await AsyncStorage.getItem('token');
-
-      let boardName = ""
-      if (category === '아티스트') {
-        boardName = "C"
-      } else {
-        boardName = "A"
-      }
-      // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
-      const query = `
-        query {
-          boards(page: 1, community:"${community}", role:"${boardName}", token:"${token}") {
+    let boardName = ""
+    if (category === '아티스트') {
+      boardName = "C"
+    } else {
+      boardName = "A"
+    }
+    // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
+    const query = `
+      query {
+        boards(page: 1, community:"${community}", role:"${boardName}", token:"${token}") {
+          id
+          content
+          createdAt
+          img01
+          isLiked
+          like
+          member {
             id
-            content
-            createdAt
-            img01
-            isLiked
-            like
+            name
+            nick
+            profileImg
+            role
+          }
+          boardComment {
+            id
+            comment
             member {
               id
               name
@@ -123,34 +134,25 @@ const CommunityItemList = ({ category, community }: ComponentProps) => {
               profileImg
               role
             }
-            boardComment {
-              id
-              comment
-              member {
-                id
-                name
-                nick
-                profileImg
-                role
-              }
-            }
           }
         }
-      `;
-      try {
-        const data = await getData(API_URL, query);
-        if (data) {
-          setItemList(data.boards);
-          return;
-        }
-        setItemList([]);
-      } catch (error) {
-        setItemList(example);
       }
-    };
-
+    `;
+    try {
+      const data = await getData(API_URL, query);
+      if (data) {
+        setItemList(data.boards);
+        return;
+      }
+      setItemList([]);
+    } catch (error) {
+      setItemList(example);
+    }
+  };
+  
+  useEffect(() => {
     fetchGraphQL();
-  }, []);
+  }, [refresh]);
 
   return (
     <Component>

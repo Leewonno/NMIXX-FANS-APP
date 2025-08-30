@@ -3,11 +3,14 @@ import styled from 'styled-components/native';
 import { AppText, getData, postData, RootStackParamList, timeAgo } from '../../../shared';
 import TranslateIcon from '../../../../assets/icons/translate.svg'
 import StarIcon from '../../../../assets/icons/star.svg'
-import { Alert, Dimensions, Pressable } from 'react-native';
+import { Alert, Dimensions, FlatList, ImageBackground, Pressable, TouchableOpacity, View } from 'react-native';
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LikeIcon from '../../../../assets/icons/favorite.svg'
 import EmptyLikeIcon from '../../../../assets/icons/favorite_empty.svg'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import Swiper from 'react-native-web-swiper';
 
 // Props
 interface ComponentProps {
@@ -145,17 +148,17 @@ const example: CommunityItemProps = {
   id: 1,
   content: "안녕하세요~ 엔써~",
   createdAt: "2025-08-24T10:00:00.000000+00:00",
-  img01: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
-  img02: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
-  img03: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
-  img04: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
-  img05: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
+  img01: "",
+  img02: "",
+  img03: "",
+  img04: "",
+  img05: "",
   like: 0,
   isLiked: true,
   member: {
     id: 4,
     nick: "LILY",
-    profileImg: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_GhpERv8NJEQbu4xwbCIZ9rRgIDAB7_dgcAe9zsmAaXWM6JmXtISUXzCBtmq5XibD_qSN0pZn1IBfkyr6042cmg",
+    profileImg: "",
     role: "C",
   },
   boardComments: [
@@ -184,7 +187,10 @@ const example: CommunityItemProps = {
 
 const CommunityDetailItem = ({ id }: ComponentProps) => {
 
+  const refresh = useSelector((state: RootState) => state.page.refresh);
+
   const [item, setItem] = useState<CommunityItemProps>(example);
+  const [images, setImages] = useState<string[]>([]);
   const [newLike, setNewLike] = useState<number | null>(null);
   const [newIsLiked, setNewIsLiked] = useState<boolean | null>(null);
 
@@ -214,57 +220,58 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
     }
   }
 
-  useEffect(() => {
-    const fetchGraphQL = async () => {
-      const token = await AsyncStorage.getItem('token');
-      // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
-      const query = `
-        query {
-          board(boardId: ${id}, token:"${token}") {
+  const fetchGraphQL = async () => {
+    const token = await AsyncStorage.getItem('token');
+    // role -> 아티스트 게시판 "C" / 팬 게시판 "A"
+    const query = `
+      query {
+        board(boardId: ${id}, token:"${token}") {
+          id
+          title
+          content
+          createdAt
+          img01
+          img02
+          img03
+          img04
+          img05
+          isLiked
+          like
+          member {
             id
-            title
-            content
-            createdAt
-            img01
-            img02
-            img03
-            img04
-            img05
-            isLiked
-            like
+            name
+            nick
+            profileImg
+          }
+          boardComments {
+            id
+            comment
             member {
               id
               name
               nick
               profileImg
             }
-            boardComments {
-              id
-              comment
-              member {
-                id
-                name
-                nick
-                profileImg
-              }
-            }
           }
         }
-      `;
-      try {
-        const data = await getData(API_URL, query);
-        const board = data.board;
-        if (board) {
-          setItem(board);
-          return;
-        }
-      } catch (error) {
-        setItem(example);
       }
-    };
+    `;
+    try {
+      const data = await getData(API_URL, query);
+      const board = data.board;
+      if (board) {
+        setItem(board);
+        setImages([board.img01, board.img02, board.img03, board.img04, board.img05].filter(Boolean));
+        return;
+      }
+    } catch (error) {
+      setItem(example);
+    }
+  };
 
+  useEffect(() => {
     fetchGraphQL();
-  }, []);
+  }, [refresh])
 
   return (
     <Component>
@@ -287,8 +294,45 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
       </ProfileBox>
       <ContentBox>
         <Content>{item.content}</Content>
+        {/* {images.length > 0 ?
+          <Swiper
+            timeout={0}
+            controlsEnabled={false}
+            containerStyle={{ width: '100%', height: screenWidth - 40 }}
+          >
+            {images.map((v, i) =>
+              <View key={i} style={{ width: '100%', height: screenWidth - 40 }}>
+                <ContentImage source={{ uri: v }} resizeMode="cover" />
+              </View>
+            )}
+          </Swiper>
+          :
+          <></>
+        } */}
+        {/* 
+        <FlatList
+          data={images}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onContentSizeChange={w => setItemWidth(w / images.length)}
+        /> */}
         {
           item.img01 ? <ContentImage source={{ uri: item.img01 }} /> : <></>
+        }
+        {
+          item.img02 ? <ContentImage source={{ uri: item.img02 }} /> : <></>
+        }
+        {
+          item.img03 ? <ContentImage source={{ uri: item.img03 }} /> : <></>
+        }
+        {
+          item.img04 ? <ContentImage source={{ uri: item.img04 }} /> : <></>
+        }
+        {
+          item.img05 ? <ContentImage source={{ uri: item.img05 }} /> : <></>
         }
         {/* 좋아요 */}
         <LikeBox>

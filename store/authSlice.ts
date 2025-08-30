@@ -5,6 +5,7 @@ interface AuthState {
   id: number | null;
   nick: string;
   profileImg: string;
+  username: string;
 }
 
 const initialState: AuthState = {
@@ -12,6 +13,7 @@ const initialState: AuthState = {
   id: null,
   nick: "",
   profileImg: "",
+  username: "",
 };
 
 const authSlice = createSlice({
@@ -30,8 +32,11 @@ const authSlice = createSlice({
     setProfileImg(state, action: PayloadAction<string>) {
       state.profileImg = action.payload;
     },
+    setUsername(state, action: PayloadAction<string>) {
+      state.username = action.payload;
+    },
   },
 });
 
-export const { setVerify, setId, setNick, setProfileImg } = authSlice.actions;
+export const { setVerify, setId, setNick, setProfileImg, setUsername } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,18 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../../shared';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import AddIcon from '../../../../assets/icons/add.svg'
 import { Platform, Pressable } from 'react-native';
+import { HomeStackParamList } from '../../../shared/types/stack';
 
-type CommunityDetailNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+type HomeNavigationProp = NativeStackNavigationProp<
+  HomeStackParamList,
   'Community'
 >;
 
 // Props
 interface ComponentProps {
+  community: string;
 };
 
 const Component = styled.View`
@@ -38,11 +39,11 @@ const CreateButton = styled(Pressable)`
 })}
 `
 
-const CommunityCreateButton = ({ }: ComponentProps) => {
-  const navigation = useNavigation<CommunityDetailNavigationProp>();
+const CommunityCreateButton = ({ community }: ComponentProps) => {
+  const homeNavigation = useNavigation<HomeNavigationProp>();
 
   const handlePress = () => {
-    navigation.navigate('Create');
+    homeNavigation.navigate('Create', {community: community});
   };
 
   return (
