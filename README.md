@@ -40,4 +40,7 @@ JYP 엔터테인먼트의 자회사 Blue Garage에서 개발·운영하는 **FAN
 ### 5-4. 로그인/회원가입
 <img width="1920" height="1080" alt="nmixxfans_login" src="https://github.com/user-attachments/assets/e4a2db6d-1d4a-44d0-b553-6c3e41e66803" />
 
-[![Video Lable](http://img.youtube.com/vi/ynX9DmGF_gU/maxresdefault.jpg)](https://youtu.be/ynX9DmGF_gU)
+## 6. 앱 사용 화면 시연
+<a href="https://youtu.be/ynX9DmGF_gU" target="_blank">
+  <img src="http://img.youtube.com/vi/ynX9DmGF_gU/maxresdefault.jpg" alt="Video Label" />
+</a>
