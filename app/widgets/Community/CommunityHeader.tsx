@@ -4,7 +4,7 @@ import { BackButton } from '../../shared';
 import { CommunityProfileBox } from '../../features';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { Animated, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 
 // Props
 interface CommunityHeaderProps {

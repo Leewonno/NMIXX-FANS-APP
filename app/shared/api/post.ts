@@ -7,5 +7,6 @@ export const postData = async (url: string, mutation: string) => {
     body: JSON.stringify({ query : mutation }),
   });
   const json = await response.json();
+  console.log(json)
   return json.data;
 }

@@ -21,7 +21,7 @@ const Community = ({ route, navigation }: CommunityProps) => {
     <Box>
       <CommunityHeader />
       <CommunityContent name={name} />
-      <CommunityFooter />
+      <CommunityFooter community={name} />
     </Box>
   );
 };

@@ -9,6 +9,7 @@ type ButtonProps = {
 }
 
 const CustomBackButton = styled(Pressable)`
+  width: 40px;
 `
 
 const BackBlackButton = ({ }: ButtonProps) => {

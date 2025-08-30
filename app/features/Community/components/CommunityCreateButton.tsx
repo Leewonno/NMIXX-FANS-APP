@@ -13,6 +13,7 @@ type CommunityDetailNavigationProp = NativeStackNavigationProp<
 
 // Props
 interface ComponentProps {
+  community: string;
 };
 
 const Component = styled.View`
@@ -38,11 +39,11 @@ const CreateButton = styled(Pressable)`
 })}
 `
 
-const CommunityCreateButton = ({ }: ComponentProps) => {
+const CommunityCreateButton = ({ community }: ComponentProps) => {
   const navigation = useNavigation<CommunityDetailNavigationProp>();
 
   const handlePress = () => {
-    navigation.navigate('Create');
+    navigation.navigate('Create', {community: community});
   };
 
   return (

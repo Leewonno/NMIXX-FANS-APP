@@ -25,7 +25,7 @@ const Title = styled(AppText)`
 
 const EmptyBox = styled.View`
   /* BackBlackButton 가로 크기 만큼 */
-  width: 20px;
+  width: 40px;
 `
 
 const CommunityDetailHeader = ({ }: CommunityDetailHeaderProps) => {
