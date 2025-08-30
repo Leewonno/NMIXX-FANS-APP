@@ -13,6 +13,14 @@ interface CommunityItemProps {
     isLiked: boolean;
 };
 
+interface CommunityItemPopularListProps {
+    id: number;
+    content: string;
+    createdAt: string;
+    member: MemberProps;
+    like: number;
+};
+
 interface CommunityItemListProps {
     id: number;
     content: string;

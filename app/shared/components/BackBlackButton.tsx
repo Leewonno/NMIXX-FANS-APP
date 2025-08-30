@@ -3,7 +3,6 @@ import LeftIcon from '../../../assets/icons/left.svg'
 import styled from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { RootStackParamList } from "../types"
 import { HomeStackParamList } from "../types/stack"
 
 type ButtonProps = {
@@ -25,7 +24,7 @@ const BackBlackButton = ({ }: ButtonProps) => {
 
   return (
     <CustomBackButton onPress={handlePressBack}>
-      <LeftIcon width={20} height={20} strokeWidth={1} stroke={"#000"} />
+      <LeftIcon width={20} height={20} strokeWidth={1} fill={"#000"} />
     </CustomBackButton>
   )
 }

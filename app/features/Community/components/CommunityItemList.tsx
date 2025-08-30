@@ -97,7 +97,7 @@ const example: CommunityItemListProps[] = [
 
 const CommunityItemList = ({ category, community }: ComponentProps) => {
   const refresh = useSelector((state: RootState) => state.page.refresh);
-  const [itemList, setItemList] = useState<CommunityItemListProps[]>(example);
+  const [itemList, setItemList] = useState<CommunityItemListProps[]>([]);
   const fetchGraphQL = async () => {
     const token = await AsyncStorage.getItem('token');
 
@@ -149,6 +149,7 @@ const CommunityItemList = ({ category, community }: ComponentProps) => {
       setItemList(example);
     }
   };
+  
   useEffect(() => {
     fetchGraphQL();
   }, [refresh]);

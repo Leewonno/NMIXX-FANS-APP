@@ -7,6 +7,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { AppText } from '../../shared';
 import { AppDispatch, RootState } from '../../../store';
 import { setRefresh } from '../../../store/pageSlice';
+import { CommunityPopularBoard } from '../../features/Community';
 
 // Props
 interface CommunityContentProps {
@@ -109,7 +110,10 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
       {routeName == '아티스트' ?
         <CommunityBoard category='아티스트' community={name} />
         :
-        <CommunityBoard category='팬' community={name} />
+        <>
+          <CommunityPopularBoard name={name} />
+          <CommunityBoard category='팬' community={name} />
+        </>
       }
     </Box>
   );

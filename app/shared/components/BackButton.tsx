@@ -38,7 +38,7 @@ const BackButton = ({ }: BackButtonProps) => {
 
   return (
     <CustomBackButton onPress={handlePressBack}>
-      <LeftIcon width={20} height={20} strokeWidth={1} stroke={scrolled && !isFirstRender.current ? "#000" : "#fff"} />
+      <LeftIcon width={20} height={20} strokeWidth={1} fill={scrolled && !isFirstRender.current ? "#000" : "#fff"} />
     </CustomBackButton>
   )
 }

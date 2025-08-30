@@ -19,7 +19,7 @@ const CommunityTitle = ({ category, community }: ComponentProps) => {
         category === '아티스트' ?
           <AppText style={style.text}>From. {community}</AppText>
           :
-          <AppText style={style.text}>팬 게시물</AppText>
+          <AppText style={style.text}>팬 게시글</AppText>
       }
     </Component>
   );

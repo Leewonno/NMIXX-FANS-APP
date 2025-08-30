@@ -25,7 +25,7 @@ const ProfileImage = styled.Image`
   height: 100%;
   border-radius: 12.5px;
   object-fit: cover;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #cbcbcb;
 `
 
 const CommunityProfileBox = ({ }: BoxProps) => {
