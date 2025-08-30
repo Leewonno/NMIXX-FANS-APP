@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { CommunityBoard, CommunityImageBox } from '../../features';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setScrolled, setY } from '../../../store/scrollSlice';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AppText } from '../../shared';
-import { AppDispatch } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
+import { setRefresh } from '../../../store/pageSlice';
 
 // Props
 interface CommunityContentProps {
@@ -29,6 +30,8 @@ const Tab = createMaterialTopTabNavigator();
 
 const CommunityContent = ({ name }: CommunityContentProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const refresh = useSelector((state: RootState) => state.page.refresh);
+  const [routeName, setRouteName] = useState<string>("아티스트");
 
   const handleScroll = (event: any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
@@ -64,6 +67,12 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
           }}>
           <Tab.Screen
             name="아티스트"
+            listeners={{
+              tabPress: () => {
+                setRouteName("아티스트")
+                dispatch(setRefresh(!refresh))
+              }
+            }}
             children={() => <></>}
             options={{
               tabBarLabel: ({ focused }) => (
@@ -77,6 +86,12 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
             }} />
           <Tab.Screen
             name="팬"
+            listeners={{
+              tabPress: () => {
+                setRouteName("팬");
+                dispatch(setRefresh(!refresh))
+              }
+            }}
             children={() => <></>}
             options={{
               tabBarLabel: ({ focused }) => (
@@ -92,7 +107,11 @@ const CommunityContent = ({ name }: CommunityContentProps) => {
         </Tab.Navigator>
       </TabBox>
       {/* <CommunityTabBar /> */}
-      <CommunityBoard category='아티스트' community={name} />
+      {routeName == '아티스트' ?
+        <CommunityBoard category='아티스트' community={name} />
+        :
+        <CommunityBoard category='팬' community={name} />
+      }
     </Box>
   );
 };

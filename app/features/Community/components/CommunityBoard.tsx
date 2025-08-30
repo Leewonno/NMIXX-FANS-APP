@@ -2,11 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { CommunityTitle } from './CommunityTitle';
 import { CommunityItemList } from './CommunityItemList';
-import { getData } from '../../../shared';
-import { API_URL } from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store';
 
 // Props
 interface ComponentProps {

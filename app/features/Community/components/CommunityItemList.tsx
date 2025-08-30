@@ -150,9 +150,8 @@ const CommunityItemList = ({ category, community }: ComponentProps) => {
     }
   };
   useEffect(() => {
-    console.log("게시판")
     fetchGraphQL();
-  }, []);
+  }, [refresh]);
 
   return (
     <Component>

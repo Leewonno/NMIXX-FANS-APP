@@ -3,13 +3,14 @@ import styled from 'styled-components/native';
 import { AppText, getData, postData, RootStackParamList, timeAgo } from '../../../shared';
 import TranslateIcon from '../../../../assets/icons/translate.svg'
 import StarIcon from '../../../../assets/icons/star.svg'
-import { Alert, Dimensions, Pressable } from 'react-native';
+import { Alert, Dimensions, FlatList, ImageBackground, Pressable, TouchableOpacity, View } from 'react-native';
 import { API_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LikeIcon from '../../../../assets/icons/favorite.svg'
 import EmptyLikeIcon from '../../../../assets/icons/favorite_empty.svg'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
+import Swiper from 'react-native-web-swiper';
 
 // Props
 interface ComponentProps {
@@ -183,12 +184,30 @@ const example: CommunityItemProps = {
     }
   ]
 }
+// interface CarouselItemContainerProps {
+//   width: number;
+// }
 
+// const CarouselItemContainer = styled.View<CarouselItemContainerProps>`
+//   width: ${props => props.width}px;
+//   /* height: 100%; */
+//   /* padding: 20px; */
+// `;
+
+// interface CarouselItemProps {
+//   color: string;
+// }
+
+const CarouselItem = styled.View<CarouselItemProps>`
+  flex: 1;
+  background-color: ${props => props.color};
+`;
 const CommunityDetailItem = ({ id }: ComponentProps) => {
 
   const refresh = useSelector((state: RootState) => state.page.refresh);
 
   const [item, setItem] = useState<CommunityItemProps>(example);
+  const [images, setImages] = useState<string[]>([]);
   const [newLike, setNewLike] = useState<number | null>(null);
   const [newIsLiked, setNewIsLiked] = useState<boolean | null>(null);
 
@@ -259,6 +278,7 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
       const board = data.board;
       if (board) {
         setItem(board);
+        setImages([board.img01, board.img02, board.img03, board.img04, board.img05].filter(Boolean));
         return;
       }
     } catch (error) {
@@ -266,14 +286,18 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log("!")
-  //   fetchGraphQL();
-  // }, []);
-
-  useEffect(()=>{
+  useEffect(() => {
     fetchGraphQL();
   }, [refresh])
+
+  // const [itemWidth, setItemWidth] = useState(0);
+  // const renderItem = ({ item }: { item: string }) => {
+  //   return (
+  //     <CarouselItemContainer key={item} width={itemWidth}>
+  //       <ContentImage source={{ uri: item }} />
+  //     </CarouselItemContainer>
+  //   );
+  // };
 
   return (
     <Component>
@@ -296,8 +320,67 @@ const CommunityDetailItem = ({ id }: ComponentProps) => {
       </ProfileBox>
       <ContentBox>
         <Content>{item.content}</Content>
+        {/* {images.length > 0 ?
+          <Swiper
+            timeout={0}
+            controlsEnabled={false}
+            containerStyle={{ width: '100%', height: screenWidth - 40 }}
+          >
+            {images.map((v, i) =>
+              <View key={i} style={{ width: '100%', height: screenWidth - 40 }}>
+                <ContentImage source={{ uri: v }} resizeMode="cover" />
+              </View>
+            )}
+          </Swiper>
+          :
+          <></>
+        } */}
+
+        {/* <FlatList
+          data={images}
+          horizontal
+          renderItem={({ item }) => (
+            <TouchableOpacity>
+              <ContentImage source={{ uri: item }} resizeMode="cover" />
+            </TouchableOpacity>
+          )}
+          keyExtractor={(_, index) => String(index)}
+        /> */}
+        {/* 
+        <FlatList
+          data={images}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onContentSizeChange={w => setItemWidth(w / images.length)}
+        /> */}
+
+        {/* <FlatList
+          data={images}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          horizontal
+          contentContainerStyle={{ width: `${100 * images.length}%` }}
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onContentSizeChange={w => setItemWidth(w / images.length)}
+        /> */}
         {
           item.img01 ? <ContentImage source={{ uri: item.img01 }} /> : <></>
+        }
+        {
+          item.img02 ? <ContentImage source={{ uri: item.img02 }} /> : <></>
+        }
+        {
+          item.img03 ? <ContentImage source={{ uri: item.img03 }} /> : <></>
+        }
+        {
+          item.img04 ? <ContentImage source={{ uri: item.img04 }} /> : <></>
+        }
+        {
+          item.img05 ? <ContentImage source={{ uri: item.img05 }} /> : <></>
         }
         {/* 좋아요 */}
         <LikeBox>
